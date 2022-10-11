@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+	<h1>공연목록</h1>
+    <hr>
+    <div></div>
+<script>
+    /* Javascript 샘플 코드 */
+
+window.onload = function() {
+    var xhr = new XMLHttpRequest();
+    var url = 'https://cors-anywhere.herokuapp.com/http://www.culture.go.kr/openapi/rest/publicperformancedisplays/period'; /*URL*/
+    var queryParams = '?' + encodeURIComponent('serviceKey') + '='+'uPhfT4W7%2BfRGxSa2CbEY27K4LycechVswTVTlHGsnfqyAC8aPMNz1dlmaY8082lJaj18zzPOyR%2B9lK4u1QSwEg%3D%3D'; /*Service Key*/
+    /*
+    // Test Link: http://127.0.0.1:8000/index/apitest/
+    // TODO: 이거 지우면 데이터받아와짐, but why?
+    queryParams += '&' + encodeURIComponent('keyword') + '=' + encodeURIComponent('');
+    queryParams += '&' + encodeURIComponent('sortStdr') + '=' + encodeURIComponent('1');
+    queryParams += '&' + encodeURIComponent('ComMsgHeader') + '=' + encodeURIComponent('');
+    queryParams += '&' + encodeURIComponent('RequestTime') + '=' + encodeURIComponent('20100810:23003422');
+    queryParams += '&' + encodeURIComponent('CallBackURI') + '=' + encodeURIComponent('');
+    queryParams += '&' + encodeURIComponent('MsgBody') + '=' + encodeURIComponent('');
+    queryParams += '&' + encodeURIComponent('from') + '=' + encodeURIComponent('20100101');
+    queryParams += '&' + encodeURIComponent('to') + '=' + encodeURIComponent('20221201');
+    queryParams += '&' + encodeURIComponent('cPage') + '=' + encodeURIComponent('1');
+    queryParams += '&' + encodeURIComponent('rows') + '=' + encodeURIComponent('10');
+    queryParams += '&' + encodeURIComponent('place') + '=' + encodeURIComponent('1');
+    queryParams += '&' + encodeURIComponent('gpsxfrom') + '=' + encodeURIComponent('129.101');
+    queryParams += '&' + encodeURIComponent('gpsyfrom') + '=' + encodeURIComponent('35.142');
+    queryParams += '&' + encodeURIComponent('gpsxto') + '=' + encodeURIComponent('129.101');
+    queryParams += '&' + encodeURIComponent('gpsyto') + '=' + encodeURIComponent('35.142');
+    */
+
+    /*
+    xhr.onreadystatechange = function () {
+        if (this.readyState == 4) {
+            alert('Status: '+this.status+'nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'nBody: '+this.responseText);
+        }
+    };
+    */
+    xhr.open('GET', url + queryParams, true);
+    xhr.onload = function(){
+    document.getElementsByTagName('div')[0].textContent = xhr.responseText;
+    //console.log(JSON.parse(xhr.responseText).boxOfficeResult.dailyBoxOfficeList[0].movieNm)
+    };
+    xhr.send('');
+};
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
