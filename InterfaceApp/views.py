@@ -14,3 +14,6 @@ def performance(request):
 
 def signup(request):
     return render(request, "signup.html")
+
+def apitest(request):
+    return render(request, 'apitest.html')
