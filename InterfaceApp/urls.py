@@ -6,5 +6,6 @@ app_name = 'InterfaceApp'
 urlpatterns = [
     path('', views.index, name='index'),
     path('login/', views.login, name='login'),
-    path('performance/', views.performance, name='performance')
+    path('performance/', views.performance, name='performance'),
+    path('signup/', views.signup, name='signup'),
 ]

@@ -11,3 +11,6 @@ def login(request):
 def performance(request):
 
     return render(request, "performance.html")
+
+def signup(request):
+    return render(request, "signup.html")
