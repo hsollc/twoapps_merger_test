@@ -3,12 +3,12 @@ from django.db import models
 class PerformanceList(models.Model):
     seq = models.IntegerField(primary_key=True)
     title = models.CharField(max_length=200)
-    startDate = models.IntegerField()
-    endDate = models.IntegerField()
+    startDate = models.DateField()
+    endDate = models.DateField()
     place = models.CharField(max_length=50)
     realmName = models.CharField(max_length=10)
     area = models.CharField(max_length=10, null=True)
-    thumbnail = models.CharField(max_length=256)
+    thumbnail = models.BinaryField()
     gpsX = models.FloatField(null=True)
     gpsY = models.FloatField(null=True)
 
