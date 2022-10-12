@@ -9,6 +9,7 @@
 	<h1>공연목록</h1>
     <hr>
     <div></div>
+    <div></div>
 <script>
     /* Javascript 샘플 코드 */
 
@@ -45,7 +46,40 @@ window.onload = function() {
     */
     xhr.open('GET', url + queryParams, true);
     xhr.onload = function(){
-    document.getElementsByTagName('div')[0].textContent = xhr.responseText;
+    //document.getElementsByTagName('div')[0].textContent = xhr.responseText;
+    //document.getElementsByTagName('div')[0].textContent = (xhr.response).getElementsByTagName('title');
+
+    // xml String -> xml
+    let parser, xmlDoc;
+    parser = new DOMParser();
+    xmlDoc = parser.parseFromString(xhr.responseText, "text/html"); // String -> xml 만들어주는 과정
+
+    // Test
+    var test1 = xmlDoc.getElementsByTagName('perforlist')[0];
+    var test2 = test1.getElementsByTagName('thumbnail')[0];
+    var test3 = test1.getElementsByTagName('thumbnail')[0].childNodes[0];
+    var test4 = test1.getElementsByTagName('thumbnail')[0].childNodes[0].nodeValue;
+    console.log(xmlDoc);
+    console.log(test1);
+    console.log('---------test3----------');
+    console.log(test3);
+    console.log(typeof(test3));
+    console.log('---------test4----------');
+    console.log(test4);
+    console.log(typeof(test4));
+    console.log(String(test4));
+
+    // 이미지 출력
+    var img = document.createElement("img");
+    img.src = test4;
+    var src = document.getElementsByTagName('div')[1];
+    src.appendChild(img);
+
+    console.log(xmlDoc.getElementsByTagName('rows')[0])
+    console.log(xmlDoc.getElementsByTagName('rows')[0].nodeValue)
+    document.getElementsByTagName('div')[0].textContent = test4;
+
+    //
     //console.log(JSON.parse(xhr.responseText).boxOfficeResult.dailyBoxOfficeList[0].movieNm)
     };
     xhr.send('');
