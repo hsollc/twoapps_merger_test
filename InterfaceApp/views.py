@@ -3,7 +3,10 @@ from django.contrib.auth.models import User
 from django.contrib import auth
 
 def index(request):
-    return render(request, "index.html")
+    context = None
+    if request.user.is_authenticated:
+        context = {'logineduser' : request.user}
+    return render(request, "index.html", context)
 
 def login(request):
     if request.method == "POST":
