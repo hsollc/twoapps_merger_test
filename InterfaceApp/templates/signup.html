@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -97,7 +98,7 @@ body {
 </head>
 <body>
 <div class="signup-form">
-    <form action="{% url 'signup' %}" method="post">
+    <form method="POST" action="{% url 'InterfaceApp:signup' %}">
         {% csrf_token %}
 		<h2>Sign Up</h2>
 		<hr>
@@ -108,7 +109,7 @@ body {
 			</div>
         </div>
         <div class="form-group">
-        	<input type="email" class="form-control" name="email" placeholder="Email" required="required">
+        	<input type="email" class="form-control" name="useremail" placeholder="Email" required="required">
         </div>
 		<div class="form-group">
             <input type="password" class="form-control" name="password" placeholder="Password" required="required">
