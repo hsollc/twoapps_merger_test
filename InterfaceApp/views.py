@@ -28,13 +28,13 @@ def performance(request):
 def signup(request):
     res_data = None
     if request.method == 'POST':
-        useremail = request.POST.get('email')
+        useremail = request.POST.get('useremail')
         firstname = request.POST.get('first_name')
         lastname = request.POST.get('last_name')
         password = request.POST.get('password')
         re_password = request.POST.get('confirm_password')
         res_data = {}
-        if User.objects.filter(email=useremail):
+        if User.objects.filter(username=useremail):
             res_data['error'] = '이미 가입된 이메일 주소 입니다.'
         elif password != re_password:
             res_data['error'] = '비밀번호가 다릅니다.'
@@ -44,7 +44,7 @@ def signup(request):
                                             last_name=lastname,
                                             password=password)
             auth.login(request, user)
-            return redirect("Interface:index")
+            return redirect("InterfaceApp:index")
     return render(request, 'signup.html', res_data)
 
 
