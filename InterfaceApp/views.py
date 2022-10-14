@@ -23,8 +23,11 @@ def login(request):
         return render(request, 'login.html')
 
 def performance(request):
-
-    return render(request, "performance.html")
+    performance_lists = PerformanceDB.objects.all()
+    context = {
+        'performance_lists': performance_lists
+    }
+    return render(request, "performance.html", context)
 
 def signup(request):
     res_data = None

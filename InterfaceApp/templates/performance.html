@@ -56,7 +56,38 @@
         </tr>
       </tbody>
     </table>
-    <div></div>
+    <div>
+      <!-- DB에서 값 받아 출력하기 임시 테스트 -->
+      <!-- 페이징 기법 필요-->
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>제목</th>
+            <th>시작일</th>
+            <th>마감일</th>
+            <th>장소</th>
+            <th>분류</th>
+            <th>GPS-X좌표</th>
+            <th>GPS-Y좌표</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for performance_list in performance_lists %}
+          <tr>
+            <td><img src="{{performance_list.thumbnail}}" style="width: 100px;"></td>
+            <td>{{performance_list.title}}</td>
+            <td>{{performance_list.startDate}}</td>
+            <td>{{performance_list.endDate}}</td>
+            <td>{{performance_list.place}}</td>
+            <td>{{performance_list.realmName}}</td>
+            <td>{{performance_list.gpsX}}</td>
+            <td>{{performance_list.gpsY}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
       <script>
 
       </script>
