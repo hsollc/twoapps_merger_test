@@ -51,6 +51,10 @@ def signup(request):
             return redirect("InterfaceApp:index")
     return render(request, 'signup.html', res_data)
 
+def logout(request):
+    if request.user.is_authenticated:
+        auth.logout(request)
+    return redirect("InterfaceApp:index")
 
 def apitest(request):
     return render(request, 'apitest.html')
