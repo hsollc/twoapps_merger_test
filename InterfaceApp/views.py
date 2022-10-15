@@ -16,7 +16,7 @@ def login(request):
         user = auth.authenticate(username=useremail, password=password)
         if user is not None :
             auth.login(request, user)
-            return redirect("Interface:index")
+            return redirect("InterfaceApp:index")
         else :
             return render(request, 'login.html', {'error': '사용자 아이디 또는 패스워드가 틀립니다.'})
     else :
