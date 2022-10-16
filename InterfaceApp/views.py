@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import auth
 from .models import PerformanceDB
+from django.core.paginator import Paginator
 
 def index(request):
     context = None
@@ -23,9 +24,16 @@ def login(request):
         return render(request, 'login.html')
 
 def performance(request):
+    # DB 불러오기
     performance_lists = PerformanceDB.objects.all()
+
+    # 페이징 기능 적용
+    page = request.GET.get('page', 1)      # 페이지
+    paginator = Paginator(performance_lists, 10)       # 페이지 당 n개씩 보여주기
+    page_obj = paginator.get_page(page)
+
     context = {
-        'performance_lists': performance_lists
+        'performance_list': page_obj
     }
     return render(request, "performance.html", context)
 

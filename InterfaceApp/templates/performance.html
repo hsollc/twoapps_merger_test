@@ -58,7 +58,6 @@
     </table>
     <div>
       <!-- DB에서 값 받아 출력하기 임시 테스트 -->
-      <!-- 페이징 기법 필요-->
       <table>
         <thead>
           <tr>
@@ -73,20 +72,69 @@
           </tr>
         </thead>
         <tbody>
-          {% for performance_list in performance_lists %}
+          {% for performance in performance_list %}
           <tr>
-            <td><img src="{{performance_list.thumbnail}}" style="width: 100px;"></td>
-            <td>{{performance_list.title}}</td>
-            <td>{{performance_list.startDate}}</td>
-            <td>{{performance_list.endDate}}</td>
-            <td>{{performance_list.place}}</td>
-            <td>{{performance_list.realmName}}</td>
-            <td>{{performance_list.gpsX}}</td>
-            <td>{{performance_list.gpsY}}</td>
+            <td><img src="{{performance.thumbnail}}" style="width: 100px;"></td>
+            <td>{{performance.title}}</td>
+            <td>{{performance.startDate}}</td>
+            <td>{{performance.endDate}}</td>
+            <td>{{performance.place}}</td>
+            <td>{{performance.realmName}}</td>
+            <td>{{performance.gpsX}}</td>
+            <td>{{performance.gpsY}}</td>
           </tr>
           {% endfor %}
         </tbody>
       </table>
+      <div>
+        <!-- 페이징 처리 시작 -->
+        <ul class="pagination justify-content-center">
+          <!-- 첫 페이지 -->
+          <li class="page-first">
+            <a class="page-link" href="?page=1">첫 페이지</a>
+          </li>
+          <!-- 이전 페이지 -->
+          {% if performance_list.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{performance_list.previous_page_number}}">이전</a>
+          </li>
+          {% else %}
+          <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+          </li>
+          {% endif %}
+          <!-- 페이지 리스트 -->
+          {% for page_number in performance_list.paginator.page_range %}
+          {% if page_number >= performance_list.number|add:-3 and page_number <= performance_list.number|add:3 %}
+            {% if page_number == performance_list.number %}
+              <li class="page-item active" aria-current="page">
+                <a class="page-link" href="?page={{page_number}}">{{page_number}}</a>
+              </li>
+            {% else %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{page_number}}">{{page_number}}</a>
+            </li>
+            {% endif %}
+          {% endif %}
+          {% endfor %}
+          <!-- 다음 페이지 -->
+          {% if performance_list.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{performance_list.next_page_number}}">다음</a>
+          </li>
+          {% else %}
+          <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+          </li>
+          {% endif %}
+          <!-- 마지막 페이지 -->
+          <li class="page-first">
+            <a class="page-link" href="?page={{performance_list.paginator.num_pages}}">마지막 페이지</a>
+          </li>
+        </ul>
+        <!-- 페이징 처리 끝 -->
+      </div>
+
     </div>
       <script>
 
