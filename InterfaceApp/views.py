@@ -80,15 +80,11 @@ def apitest(request):
     return render(request, 'apitest.html')
 
 def wishlist(request):
-
-    wishlist = WishlistDB.objects.all()
-
-    # 페이징 기능 적용
-    page = request.GET.get('page', 1)  # 페이지
-    paginator = Paginator(wishlist, 10)  # 페이지 당 n개씩 보여주기
-    page_obj = paginator.get_page(page)
+    if request.user.is_authenticated:
+        loggedin_user = request.user.id
+        wishlist = WishlistDB.objects.filter(user_id__exact=loggedin_user)
 
     context = {
-        'wishlist': page_obj
+        'wishlist': wishlist,
     }
     return render(request, 'wishlist.html', context)

@@ -20,24 +20,6 @@
       </div>
     </section><!-- End Breadcrumbs -->
 
-    <section class="search" style="text-align: center;">
-      <form action="">
-        검색키워드:&nbsp;&nbsp;<input type="text" name="keyword"><button>검색</button><br>
-        지역:&nbsp;&nbsp;<input type="text" name="area"><br>
-        기간:&nbsp;&nbsp;<input type="date">&nbsp;~&nbsp;<input type="date"><br>
-        분야:&nbsp;&nbsp;
-        <input type="checkbox" value="공연">&nbsp;공연&nbsp;&nbsp;
-        <input type="checkbox" value="전시">&nbsp;전시<br><br>
-        <input type="submit" value="조회하기">
-      </form>
-    </section>
-
-    <hr>
-
-      <script>
-
-      </script>
-
     <!-- ======= Blog Section ======= -->
     <section id="blog" class="blog">
       <div class="container" data-aos="fade-up">
@@ -46,7 +28,7 @@
             <div>
               <table class="performance_table">
                 <thead>
-                  <tr style="border-bottom: 1px solid black;">
+                  <tr style="border-bottom: 1px solid black; background-color:#e6e6e6;">
                     <th class="performance_thumbnail"></th>
                     <th class="performance_title">제목</th>
                     <th class="performance_startDate">시작일</th>
@@ -54,11 +36,12 @@
                     <th class="performance_place">장소</th>
                     <th class="performance_area">지역</th>
                     <th class="performance_realName">분류</th>
+                    <th>찜</th>
                   </tr>
                 </thead>
                 <tbody>
                   {% for performance in performance_list %}
-                  <tr>
+                  <tr style="border-bottom: 1px solid lightgray;">
                     <td class="performance_thumbnail"><img src="{{performance.thumbnail}}" style="width: 100px;"></td>
                     <td class="performance_title">{{performance.title}}</td>
                     <td class="performance_startDate">{{performance.startDate}}</td>
@@ -66,10 +49,12 @@
                     <td class="performance_place">{{performance.place}}</td>
                     <td class="performance_area">{{performance.area}}</td>
                     <td class="performance_realName">{{performance.realmName}}</td>
+                    <td><button style="border:none; padding:0;" onclick=""><span style="color:#b3b3b3;">♡</span></button></td>
                   </tr>
                   {% endfor %}
                 </tbody>
               </table>
+              <br>
               <div class="blog-pagination">
                 <!-- 페이징 처리 시작 -->
                 <ul class="justify-content-center">
@@ -132,10 +117,10 @@
                   <button type="submit"><i class="bi bi-search"></i></button>
                 </form>
               </div><!-- End sidebar search formn-->
-
+              <br>
               <h3 class="sidebar-title">기간</h3>
               <div>
-
+              <br>
               </div>
               <h3 class="sidebar-title">지역</h3>
               <div class="sidebar-item tags">
@@ -157,9 +142,10 @@
                   <li><a href="#">제주</a></li>
                   <li><a href="#">충남</a></li>
                   <li><a href="#">충북</a></li>
+                  <li><a href="#">기타</a></li>
                 </ul>
               </div><!-- End sidebar categories-->
-
+              <br>
               <h3 class="sidebar-title">분류</h3>
               <div class="sidebar-item tags">
                 <ul>
@@ -181,6 +167,9 @@
       </div>
     </section><!-- End Blog Section -->
 
+  <script>
+
+  </script>
 
   </main><!-- End #main -->
 
