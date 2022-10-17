@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import auth
-from .models import PerformanceDB
+from .models import PerformanceDB, WishlistDB
 from django.core.paginator import Paginator
 
 def index(request):
@@ -66,3 +66,17 @@ def logout(request):
 
 def apitest(request):
     return render(request, 'apitest.html')
+
+def wishlist(request):
+
+    wishlist = WishlistDB.objects.all()
+
+    # 페이징 기능 적용
+    page = request.GET.get('page', 1)  # 페이지
+    paginator = Paginator(wishlist, 10)  # 페이지 당 n개씩 보여주기
+    page_obj = paginator.get_page(page)
+
+    context = {
+        'wishlist': page_obj
+    }
+    return render(request, 'wishlist.html', context)
