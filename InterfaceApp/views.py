@@ -44,8 +44,19 @@ def performance(request):
     paginator = Paginator(performance_lists, 10)       # 페이지 당 n개씩 보여주기
     page_obj = paginator.get_page(page)
 
+    # TODO: 검색 후 페이지 이동시 검색 결과가 리셋되는 문제 해결
+    # 검색 기능
+    if request.GET.get('performance_search'):
+        print('running')
+        performance_search = request.GET.get('performance_search')     # 검색 결과 받아오기
+        search_list = PerformanceDB.objects.filter(title__contains=performance_search)  # DB에서 title에 검색 결과가 포함되어 있는 값
+        page = request.GET.get('page', 1)  # 페이지
+        paginator = Paginator(search_list, 10)  # 페이지 당 n개씩 보여주기
+        page_obj = paginator.get_page(page)
+
     context = {
-        'performance_list': page_obj
+        'performance_list': page_obj,
+        'search_list': page_obj
     }
     return render(request, "performance.html", context)
 
