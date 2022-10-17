@@ -3,11 +3,23 @@ from django.contrib.auth.models import User
 from django.contrib import auth
 from .models import PerformanceDB, WishlistDB
 from django.core.paginator import Paginator
+import random
 
 def index(request):
     context = None
+    logineduser = False
     if request.user.is_authenticated:
-        context = {'logineduser' : request.user}
+        logineduser = True
+    posters = PerformanceDB.objects.values_list('thumbnail', flat=True)
+    pick = random.sample(list(posters), 6)
+    context = {'logineduser': logineduser,
+               'poster1': pick[0],
+               'poster2': pick[1],
+               'poster3': pick[2],
+               'poster4': pick[3],
+               'poster5': pick[4],
+               'poster6': pick[5],
+               }
     return render(request, "index.html", context)
 
 def login(request):
