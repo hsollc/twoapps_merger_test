@@ -19,7 +19,7 @@
 
       </div>
     </section><!-- End Breadcrumbs -->
-    <!--
+
     <section class="search" style="text-align: center;">
       <form action="">
         검색키워드:&nbsp;&nbsp;<input type="text" name="keyword"><button>검색</button><br>
@@ -33,7 +33,7 @@
     </section>
 
     <hr>
-    -->
+
       <script>
 
       </script>
@@ -44,28 +44,28 @@
         <div class="row">
           <div class="col-lg-8 entries">
             <div>
-              <table>
+              <table class="performance_table">
                 <thead>
-                  <tr>
-                    <th></th>
-                    <th>제목</th>
-                    <th>시작일</th>
-                    <th>마감일</th>
-                    <th>장소</th>
-                    <th>지역</th>
-                    <th>분류</th>
+                  <tr style="border-bottom: 1px solid black;">
+                    <th class="performance_thumbnail"></th>
+                    <th class="performance_title">제목</th>
+                    <th class="performance_startDate">시작일</th>
+                    <th class="performance_endDate">마감일</th>
+                    <th class="performance_place">장소</th>
+                    <th class="performance_area">지역</th>
+                    <th class="performance_realName">분류</th>
                   </tr>
                 </thead>
                 <tbody>
                   {% for performance in performance_list %}
                   <tr>
-                    <td><img src="{{performance.thumbnail}}" style="width: 100px;"></td>
-                    <td>{{performance.title}}</td>
-                    <td>{{performance.startDate}}</td>
-                    <td>{{performance.endDate}}</td>
-                    <td>{{performance.place}}</td>
-                    <td>{{performance.area}}</td>
-                    <td>{{performance.realmName}}</td>
+                    <td class="performance_thumbnail"><img src="{{performance.thumbnail}}" style="width: 100px;"></td>
+                    <td class="performance_title">{{performance.title}}</td>
+                    <td class="performance_startDate">{{performance.startDate}}</td>
+                    <td class="performance_endDate">{{performance.endDate}}</td>
+                    <td class="performance_place">{{performance.place}}</td>
+                    <td class="performance_area">{{performance.area}}</td>
+                    <td class="performance_realName">{{performance.realmName}}</td>
                   </tr>
                   {% endfor %}
                 </tbody>
@@ -125,7 +125,7 @@
 
             <div class="sidebar">
 
-              <h3 class="sidebar-title">Search</h3>
+              <h3 class="sidebar-title">검색</h3>
               <div class="sidebar-item search-form">
                 <form action="">
                   <input type="text">
@@ -133,32 +133,42 @@
                 </form>
               </div><!-- End sidebar search formn-->
 
-              <h3 class="sidebar-title">Categories</h3>
-              <div class="sidebar-item categories">
+              <h3 class="sidebar-title">기간</h3>
+              <div>
+
+              </div>
+              <h3 class="sidebar-title">지역</h3>
+              <div class="sidebar-item tags">
                 <ul>
-                  <li><a href="#">General <span>(25)</span></a></li>
-                  <li><a href="#">Lifestyle <span>(12)</span></a></li>
-                  <li><a href="#">Travel <span>(5)</span></a></li>
-                  <li><a href="#">Design <span>(22)</span></a></li>
-                  <li><a href="#">Creative <span>(8)</span></a></li>
-                  <li><a href="#">Educaion <span>(14)</span></a></li>
+                  <li><a href="#">강원</a></li>
+                  <li><a href="#">경기</a></li>
+                  <li><a href="#">경남</a></li>
+                  <li><a href="#">경북</a></li>
+                  <li><a href="#">광주</a></li>
+                  <li><a href="#">대구</a></li>
+                  <li><a href="#">대전</a></li>
+                  <li><a href="#">부산</a></li>
+                  <li><a href="#">서울</a></li>
+                  <li><a href="#">세종</a></li>
+                  <li><a href="#">울산</a></li>
+                  <li><a href="#">인천</a></li>
+                  <li><a href="#">전남</a></li>
+                  <li><a href="#">전북</a></li>
+                  <li><a href="#">제주</a></li>
+                  <li><a href="#">충남</a></li>
+                  <li><a href="#">충북</a></li>
                 </ul>
               </div><!-- End sidebar categories-->
 
-              <h3 class="sidebar-title">Tags</h3>
+              <h3 class="sidebar-title">분류</h3>
               <div class="sidebar-item tags">
                 <ul>
-                  <li><a href="#">App</a></li>
-                  <li><a href="#">IT</a></li>
-                  <li><a href="#">Business</a></li>
-                  <li><a href="#">Mac</a></li>
-                  <li><a href="#">Design</a></li>
-                  <li><a href="#">Office</a></li>
-                  <li><a href="#">Creative</a></li>
-                  <li><a href="#">Studio</a></li>
-                  <li><a href="#">Smart</a></li>
-                  <li><a href="#">Tips</a></li>
-                  <li><a href="#">Marketing</a></li>
+                  <li><a href="#">국악</a></li>
+                  <li><a href="#">무용</a></li>
+                  <li><a href="#">미술</a></li>
+                  <li><a href="#">연극</a></li>
+                  <li><a href="#">음악</a></li>
+                  <li><a href="#">기타</a></li>
                 </ul>
               </div><!-- End sidebar tags-->
 

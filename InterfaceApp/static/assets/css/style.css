@@ -1967,7 +1967,31 @@ section {
   color: #aaaaaa;
   font-size: 14px;
 }
+.performance_table{
+  border-spacing: 2px;
+  border-top: 1px solid black;
+}
+.performance_thumbnail {
 
+}
+.performance_title{
+  width: 30%;
+}
+.performance_startDate{
+  width: 20%;
+}
+.performance_endDate{
+  width: 20%;
+}
+.performance_place{
+  width: 15%;
+}
+.performance_area{
+  width: 5%;
+}
+.performance_realName{
+  width: 5%;
+}
 /*--------------------------------------------------------------
 # Footer
 --------------------------------------------------------------*/
@@ -2131,3 +2155,8 @@ section {
   color: #fff;
   text-decoration: none;
 }
+
+#performance_thumbnail{
+  width: 10%;
+}
+
