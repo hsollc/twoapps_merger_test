@@ -58,32 +58,33 @@
                 <tbody>
                   <!-- start of 검색 결과가 있을 경우 -->
                   {% if search_list %}
-                  {% for performance in search_list %}
-                  <tr>
-                    <td class="performance_thumbnail"><img src="{{performance.thumbnail}}" style="width: 100px;"></td>
-                    <td class="performance_title">{{performance.title}}</td>
-                    <td class="performance_startDate">{{performance.startDate}}</td>
-                    <td class="performance_endDate">{{performance.endDate}}</td>
-                    <td class="performance_place">{{performance.place}}</td>
-                    <td class="performance_area">{{performance.area}}</td>
-                    <td class="performance_realName">{{performance.realmName}}</td>
-                  </tr>
-                  {% endfor %}
+                    {% for performance in search_list %}
+                    <tr style="border-bottom: 1px solid lightgray;">
+                      <td class="performance_thumbnail"><img src="{{performance.thumbnail}}" style="width: 100px;"></td>
+                      <td class="performance_title">{{performance.title}}</td>
+                      <td class="performance_startDate">{{performance.startDate}}</td>
+                      <td class="performance_endDate">{{performance.endDate}}</td>
+                      <td class="performance_place">{{performance.place}}</td>
+                      <td class="performance_area">{{performance.area}}</td>
+                      <td class="performance_realName">{{performance.realmName}}</td>
+                      <td><button style="border:none; padding:0;" onclick=""><span style="color:#b3b3b3;">♡</span></button></td>
+                    </tr>
+                    {% endfor %}
                   <!-- end of 검색 결과가 있을 경우-->
                   <!-- start of 검색 결과가 없을 경우 -->
                   {% else %}
-                  {% for performance in performance_list %}
-                  <tr style="border-bottom: 1px solid lightgray;">
-                    <td class="performance_thumbnail"><img src="{{performance.thumbnail}}" style="width: 100px;"></td>
-                    <td class="performance_title">{{performance.title}}</td>
-                    <td class="performance_startDate">{{performance.startDate}}</td>
-                    <td class="performance_endDate">{{performance.endDate}}</td>
-                    <td class="performance_place">{{performance.place}}</td>
-                    <td class="performance_area">{{performance.area}}</td>
-                    <td class="performance_realName">{{performance.realmName}}</td>
-                    <td><button style="border:none; padding:0;" onclick=""><span style="color:#b3b3b3;">♡</span></button></td>
-                  </tr>
-                  {% endfor %}
+                    {% for performance in performance_list %}
+                    <tr style="border-bottom: 1px solid lightgray;">
+                      <td class="performance_thumbnail"><img src="{{performance.thumbnail}}" style="width: 100px;"></td>
+                      <td class="performance_title">{{performance.title}}</td>
+                      <td class="performance_startDate">{{performance.startDate}}</td>
+                      <td class="performance_endDate">{{performance.endDate}}</td>
+                      <td class="performance_place">{{performance.place}}</td>
+                      <td class="performance_area">{{performance.area}}</td>
+                      <td class="performance_realName">{{performance.realmName}}</td>
+                      <td><button style="border:none; padding:0;" onclick=""><span style="color:#b3b3b3;">♡</span></button></td>
+                    </tr>
+                    {% endfor %}
                   {% endif %}
                   <!-- end of 검색 결과가 없을 경우-->
                 </tbody>
