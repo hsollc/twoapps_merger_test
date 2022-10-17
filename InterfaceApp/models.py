@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class PerformanceDB(models.Model):
     seq = models.IntegerField(primary_key=True)
@@ -14,3 +15,7 @@ class PerformanceDB(models.Model):
 
     def __str__(self):
         return f"seq: {self.seq}, title: {self.title}, startDate: {self.startDate}, endDate: {self.endDate}, place: {self.place}, realmName: {self.realmName}, area: {self.area}, thumbnail: {self.thumbnail}, gpsX: {self.gpsX}, gpsY: {self.gpsY}"
+
+class WishlistDB(models.Model):
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    performance_seq = models.ForeignKey(PerformanceDB, on_delete=models.CASCADE)
