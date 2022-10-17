@@ -20,6 +20,22 @@
       </div>
     </section><!-- End Breadcrumbs -->
 
+<!--
+    <section class="search" style="text-align: center;">
+      <form action="">
+        검색키워드:&nbsp;&nbsp;<input type="text" name="keyword"><button>검색</button><br>
+        지역:&nbsp;&nbsp;<input type="text" name="area"><br>
+        기간:&nbsp;&nbsp;<input type="date">&nbsp;~&nbsp;<input type="date"><br>
+        분야:&nbsp;&nbsp;
+        <input type="checkbox" value="공연">&nbsp;공연&nbsp;&nbsp;
+        <input type="checkbox" value="전시">&nbsp;전시<br><br>
+        <input type="submit" value="조회하기">
+      </form>
+    </section>
+
+    <hr>
+-->
+
     <!-- ======= Blog Section ======= -->
     <section id="blog" class="blog">
       <div class="container" data-aos="fade-up">
@@ -40,6 +56,22 @@
                   </tr>
                 </thead>
                 <tbody>
+                  <!-- start of 검색 결과가 있을 경우 -->
+                  {% if search_list %}
+                  {% for performance in search_list %}
+                  <tr>
+                    <td class="performance_thumbnail"><img src="{{performance.thumbnail}}" style="width: 100px;"></td>
+                    <td class="performance_title">{{performance.title}}</td>
+                    <td class="performance_startDate">{{performance.startDate}}</td>
+                    <td class="performance_endDate">{{performance.endDate}}</td>
+                    <td class="performance_place">{{performance.place}}</td>
+                    <td class="performance_area">{{performance.area}}</td>
+                    <td class="performance_realName">{{performance.realmName}}</td>
+                  </tr>
+                  {% endfor %}
+                  <!-- end of 검색 결과가 있을 경우-->
+                  <!-- start of 검색 결과가 없을 경우 -->
+                  {% else %}
                   {% for performance in performance_list %}
                   <tr style="border-bottom: 1px solid lightgray;">
                     <td class="performance_thumbnail"><img src="{{performance.thumbnail}}" style="width: 100px;"></td>
@@ -52,10 +84,64 @@
                     <td><button style="border:none; padding:0;" onclick=""><span style="color:#b3b3b3;">♡</span></button></td>
                   </tr>
                   {% endfor %}
+                  {% endif %}
+                  <!-- end of 검색 결과가 없을 경우-->
                 </tbody>
               </table>
               <br>
               <div class="blog-pagination">
+                <!-- 검색 결과가 있을 경우 -->
+                {% if search_list %}
+                <!-- 페이징 처리 시작 -->
+                <ul class="justify-content-center">
+                  <!-- 첫 페이지 -->
+                  <li class="page-first">
+                    <a class="page-link" href="?page=1"><<</a>
+                  </li>
+                  <!-- 이전 페이지 -->
+                  {% if search_list.has_previous %}
+                  <li class="page-item">
+                    <a class="page-link" href="?page={{search_list.previous_page_number}}"><</a>
+                  </li>
+                  {% else %}
+                  <li class="page-item disabled">
+                    <a class="page-link" tabindex="-1" aria-disabled="true" href="#"><</a>
+                  </li>
+                  {% endif %}
+                  <!-- 페이지 리스트 -->
+                  {% for page_number in search_list.paginator.page_range %}
+                  {% if page_number >= search_list.number|add:-3 and page_number <= search_list.number|add:3 %}
+                    {% if page_number == search_list.number %}
+                      <li class="page-item active" aria-current="page">
+                        <a class="page-link" href="?page={{page_number}}">{{page_number}}</a>
+                      </li>
+                    {% else %}
+                    <li class="page-item">
+                      <a class="page-link" href="?page={{page_number}}">{{page_number}}</a>
+                    </li>
+                    {% endif %}
+                  {% endif %}
+                  {% endfor %}
+                  <!-- 다음 페이지 -->
+                  {% if search_list.has_next %}
+                  <li class="page-item">
+                    <a class="page-link" href="?page={{search_list.next_page_number}}">></a>
+                  </li>
+                  {% else %}
+                  <li class="page-item disabled">
+                    <a class="page-link" tabindex="-1" aria-disabled="true" href="#">></a>
+                  </li>
+                  {% endif %}
+                  <!-- 마지막 페이지 -->
+                  <li class="page-first">
+                    <a class="page-link" href="?page={{search_list.paginator.num_pages}}">>></a>
+                  </li>
+                </ul>
+                <!-- 페이징 처리 끝 -->
+                <!-- end of 검색 결과가 있을 경우-->
+
+                <!-- start of 검색 결과가 없을 경우-->
+                {% else %}
                 <!-- 페이징 처리 시작 -->
                 <ul class="justify-content-center">
                   <!-- 첫 페이지 -->
@@ -102,6 +188,8 @@
                   </li>
                 </ul>
                 <!-- 페이징 처리 끝 -->
+                {% endif %}
+                <!-- end of 검색 결과가 없을 경우-->
               </div>
             </div>
           </div><!-- End blog entries list -->
@@ -112,8 +200,9 @@
 
               <h3 class="sidebar-title">검색</h3>
               <div class="sidebar-item search-form">
-                <form action="">
-                  <input type="text">
+                <form action="{% url 'InterfaceApp:performance'%}" method="GET">
+                  {% csrf_token %}
+                  <input type="text" name="performance_search">
                   <button type="submit"><i class="bi bi-search"></i></button>
                 </form>
               </div><!-- End sidebar search formn-->
@@ -157,7 +246,14 @@
                   <li><a href="#">기타</a></li>
                 </ul>
               </div><!-- End sidebar tags-->
+              <div class="sidebar-item tags">
+                <br><br>
+              <!-- TODO: 초기화 기능 구현 -->
+                <ul style="text-align: center;">
+                  <li><a href="#">초기화</a></li>
+                </ul>
 
+              </div><!-- End sidebar tags-->
             </div><!-- End sidebar -->
 
           </div><!-- End blog sidebar -->
