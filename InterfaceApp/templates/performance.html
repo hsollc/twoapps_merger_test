@@ -141,38 +141,101 @@
               </div>
               <h3 class="sidebar-title">지역</h3>
               <div class="sidebar-item tags">
-                <ul>
-                  <li><a href="#">강원</a></li>
-                  <li><a href="#">경기</a></li>
-                  <li><a href="#">경남</a></li>
-                  <li><a href="#">경북</a></li>
-                  <li><a href="#">광주</a></li>
-                  <li><a href="#">대구</a></li>
-                  <li><a href="#">대전</a></li>
-                  <li><a href="#">부산</a></li>
-                  <li><a href="#">서울</a></li>
-                  <li><a href="#">세종</a></li>
-                  <li><a href="#">울산</a></li>
-                  <li><a href="#">인천</a></li>
-                  <li><a href="#">전남</a></li>
-                  <li><a href="#">전북</a></li>
-                  <li><a href="#">제주</a></li>
-                  <li><a href="#">충남</a></li>
-                  <li><a href="#">충북</a></li>
-                  <li><a href="#">기타</a></li>
-                </ul>
+                <form action="{% url 'InterfaceApp:performance'%}" method="GET">
+                {% csrf_token %}
+                  <ul>
+                    <li>
+                      <!-- TODO: 코드 함수화 필요 -> 딕셔너리 이용?-->
+                      <a href="javascript:area('gangwon')" class="gangwon">강원</a>
+                      <input type="checkbox" id="gangwon" name="area" value="강원" style="display:none;">
+                    </li>
+                    <li>
+                      <a href="javascript:area('gyeonggi')" class="gyeonggi">경기</a>
+                      <input type="checkbox" id="gyeonggi" name="area" value="경기" style="display:none;">
+                    </li>
+                    <li>
+                      <a href="javascript:area('gyeongnam')" class="gyeongnam">경남</a>
+                      <input type="checkbox" id="gyeongnam" name="area" value="경남" style="display:none;">
+                    </li>
+                    <li>
+                      <a href="javascript:area('gyeongbuk')" class="gyeongbuk">경북</a>
+                      <input type="checkbox" id="gyeongbuk" name="area" value="경북" style="display:none;">
+                    </li>
+                    <li>
+                      <a href="javascript:area('gwangju')" class="gwangju">광주</a>
+                      <input type="checkbox" id="gwangju" name="area" value="광주" style="display:none;">
+                    </li>
+                    <li>
+                      <a href="javascript:area('daegu')" class="daegu">대구</a>
+                      <input type="checkbox" id="daegu" name="area" value="대구" style="display:none;">
+                    </li>
+                    <li>
+                      <a href="javascript:area('daejeon')" class="daejeon">대전</a>
+                      <input type="checkbox" id="daejeon" name="area" value="대전" style="display:none;">
+                    </li>
+                    <li>
+                      <a href="javascript:area('busan')" class="busan">부산</a>
+                      <input type="checkbox" id="busan" name="area" value="부산" style="display:none;">
+                    </li>
+                    <li>
+                      <a href="javascript:area('seoul')" class="seoul">서울</a>
+                      <input type="checkbox" id="seoul" name="area" value="서울" style="display:none;">
+                    </li>
+                    <li>
+                      <a href="javascript:area('sejong')" class="sejong">세종</a>
+                      <input type="checkbox" id="sejong" name="area" value="세종" style="display:none;">
+                    </li>
+                    <li>
+                      <a href="javascript:area('ulsan')" class="ulsan">울산</a>
+                      <input type="checkbox" id="ulsan" name="area" value="울산" style="display:none;">
+                    </li>
+                    <li>
+                      <a href="javascript:area('incheon')" class="incheon">인천</a>
+                      <input type="checkbox" id="incheon" name="area" value="인천" style="display:none;">
+                    </li>
+                    <li>
+                      <a href="javascript:area('jeonnam')" class="jeonnam">전남</a>
+                      <input type="checkbox" id="jeonnam" name="area" value="전남" style="display:none;">
+                    </li>
+                    <li>
+                      <a href="javascript:area('jeonbuk')" class="jeonbuk">전북</a>
+                      <input type="checkbox" id="jeonbuk" name="area" value="전북" style="display:none;">
+                    </li>
+                    <li>
+                      <a href="javascript:area('jeju')" class="jeju">제주</a>
+                      <input type="checkbox" id="jeju" name="area" value="제주" style="display:none;">
+                    </li>
+                    <li>
+                      <a href="javascript:area('chungnam')" class="chungnam">충남</a>
+                      <input type="checkbox" id="chungnam" name="area" value="충남" style="display:none;">
+                    </li>
+                    <li>
+                      <a href="javascript:area('chungbuk')" class="chungbuk">충북</a>
+                      <input type="checkbox" id="chungbuk" name="area" value="충북" style="display:none;">
+                    </li>
+                    <li>
+                      <a href="javascript:area('etc')" class="etc">기타</a>
+                      <input type="checkbox" id="etc" name="area" value="기타" style="display:none;">
+                    </li>
+                  </ul>
+                  <ul style="text-align: center;">
+                    <li><button type="submit" onclick="#">해당 지역으로 검색</button></li>
+                  </ul>
+                </form>
               </div><!-- End sidebar categories-->
               <br>
               <h3 class="sidebar-title">분류</h3>
               <div class="sidebar-item tags">
-                <ul>
-                  <li><a href="#">국악</a></li>
-                  <li><a href="#">무용</a></li>
-                  <li><a href="#">미술</a></li>
-                  <li><a href="#">연극</a></li>
-                  <li><a href="#">음악</a></li>
-                  <li><a href="#">기타</a></li>
-                </ul>
+                <form>
+                  <ul>
+                    <li><a href="#">국악</a></li>
+                    <li><a href="#">무용</a></li>
+                    <li><a href="#">미술</a></li>
+                    <li><a href="#">연극</a></li>
+                    <li><a href="#">음악</a></li>
+                    <li><a href="#">기타</a></li>
+                  </ul>
+                </form>
               </div><!-- End sidebar tags-->
               <div class="sidebar-item tags">
                 <br><br>
@@ -191,7 +254,39 @@
     </section><!-- End Blog Section -->
 
   <script>
+    var selectedArea = {
+      'gangwon': false,
+      'gyeonggi': false,
+      'gyeongnam': false,
+      'gyeongbuk': false,
+      'gwangju': false,
+      'daegu': false,
+      'daejeon': false,
+      'busan': false,
+      'seoul': false,
+      'sejong': false,
+      'ulsan': false,
+      'incheon': false,
+      'jeonnam': false,
+      'jeonbuk': false,
+      'jeju': false,
+      'chungnam': false,
+      'chungbuk': false,
+      'etc': false
+    }
 
+    function area(area){
+      if(!selectedArea[area]){
+        document.getElementById(area).checked = true;
+        selectedArea[area] = true;
+        document.getElementsByClassName(area)[0].style.cssText = 'color: #fff; border: 1px solid #e03a3c; background: #e03a3c;'
+      }
+      else{
+        document.getElementById(area).checked = false;
+        selectedArea[area] = false;
+        document.getElementsByClassName(area)[0].style.cssText = '  color: #515151; font-size: 14px; padding: 6px 14px; margin: 0 6px 8px 0; border: 1px solid #c4c4c4; display: inline-block; transition: 0.3s; background: none;'
+      }
+    }
   </script>
 
   </main><!-- End #main -->
