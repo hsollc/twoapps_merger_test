@@ -37,7 +37,6 @@ def login(request):
 
 
 def performance(request):
-    # TODO: 검색 후 페이지 이동시 검색 결과가 리셋되는 문제 해결
     # TODO: 로딩속도 개선 -> 링크 이미지를 파일로 db에 저장??
     # 검색 기능
     if request.GET.get('performance_search'):
