@@ -137,7 +137,12 @@
               </div><!-- End sidebar search formn-->
               <br>
               <h3 class="sidebar-title">기간</h3>
-              <div>
+              <div class="search-form">
+                <form action="{% url 'InterfaceApp:performance'%}" method="GET">
+                  {% csrf_token %}
+                  <input type="date" name="date" id="date">
+                  <button type="submit"><i class="bi bi-search"></i></button>
+                </form>
               <br>
               </div>
               <h3 class="sidebar-title">지역</h3>
@@ -285,6 +290,10 @@
 
 
     }
+
+    // 기간
+    document.getElementById('date').value = new Date().toISOString().substring(0,10);
+
     // 지역
     var selectedAreaDict = {
       'gangwon': false,

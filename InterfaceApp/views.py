@@ -42,6 +42,11 @@ def performance(request):
     if request.GET.get('performance_search'):
         performance_search = request.GET.get('performance_search')     # 검색 결과 받아오기
         performance_lists = PerformanceDB.objects.filter(title__contains=performance_search)  # DB에서 title에 검색 결과가 포함되어 있는 값
+    # 기간 선택 기능
+    if request.GET.get('date'):
+        date_search = request.GET.get('date')     # 검색 결과 받아오기
+        performance_lists = PerformanceDB.objects.filter(startDate__lte=date_search, endDate__gte=date_search)  # DB에서 title에 검색 결과가 포함되어 있는 값
+        print(request.GET.get('date'))
     # 지역 선택 기능
     elif request.GET.get('area'):
         area_list = request.GET.getlist('area')
