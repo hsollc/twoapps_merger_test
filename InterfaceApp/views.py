@@ -9,7 +9,7 @@ def index(request):
     context = None
     logineduser = False
     if request.user.is_authenticated:
-        logineduser = request.user.last_name
+        logineduser = request.user.first_name + request.user.last_name
     posters = PerformanceDB.objects.values_list('thumbnail', flat=True)
     pick = random.sample(list(posters), 6)
     context = {'logineduser': logineduser,
