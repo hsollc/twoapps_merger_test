@@ -133,10 +133,13 @@ def apitest(request):
 
 def wishlist(request):
     #if request.user.is_authenticated:
-    #    loggedin_user = request.user.id
-    get_list = WishlistDB.objects.all().select_related('performance_seq')
-    wish_list = get_list
-    print(wish_list)
+    loggedin_user = request.user.id
+    wish_list = []
+    get_list = WishlistDB.objects.filter(user_id=loggedin_user)
+    for i in range(len(get_list)):
+        wish_list.append(get_list[i].performance_seq)
+
+
     context = {
         'wishlist': wish_list,
     }

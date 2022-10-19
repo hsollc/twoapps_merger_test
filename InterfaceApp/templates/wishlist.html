@@ -39,16 +39,16 @@
                   </tr>
                 </thead>
                 <tbody>
-                  {% for item in wish_list %}
-                  <tr id="{{item.performance_seq.seq}}" style="border-bottom: 1px solid lightgray;">
-                    <td class="performance_thumbnail"><img src="{{item.performance_seq.thumbnail}}" style="width: 100px;"></td>
-                    <td class="performance_title">{{item.PerformanceDB.title}}</td>
-                    <td class="performance_startDate">{{item.performance_seq.startDate}}</td>
-                    <td class="performance_endDate">{{item.performance_seq.endDate}}</td>
-                    <td class="performance_place">{{item.performance_seq.place}}</td>
-                    <td class="performance_area">{{item.performance_seq.area}}</td>
-                    <td class="performance_realName">{{item.performance_seq.realmName}}</td>
-                    <td><button class="button_gray" onclick="delWishlist({{item.performance_seq.seq}})">ⓧ</button></td>
+                  {% for item in wishlist %}
+                  <tr id="{{item.seq}}" style="border-bottom: 1px solid lightgray;">
+                    <td class="performance_thumbnail"><img src="{{item.thumbnail}}" style="width: 100px;"></td>
+                    <td class="performance_title">{{item.title}}</td>
+                    <td class="performance_startDate">{{item.startDate}}</td>
+                    <td class="performance_endDate">{{item.endDate}}</td>
+                    <td class="performance_place">{{item.place}}</td>
+                    <td class="performance_area">{{item.area}}</td>
+                    <td class="performance_realName">{{item.realmName}}</td>
+                    <td><button class="button_gray" onclick="delWishlist({{item.seq}})">ⓧ</button></td>
                   </tr>
                   {% endfor %}
                 </tbody>
