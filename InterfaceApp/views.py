@@ -137,12 +137,13 @@ def apitest(request):
     return render(request, 'apitest.html')
 
 def wishlist(request):
-    if request.user.is_authenticated:
-        loggedin_user = request.user.id
-        wishlist = WishlistDB.objects.filter(user_id__exact=loggedin_user)
-
+    #if request.user.is_authenticated:
+    #    loggedin_user = request.user.id
+    get_list = WishlistDB.objects.all().select_related('performance_seq')
+    wish_list = get_list
+    print(wish_list)
     context = {
-        'wishlist': wishlist,
+        'wishlist': wish_list,
     }
     return render(request, 'wishlist.html', context)
 

@@ -2182,10 +2182,11 @@ section {
 }
 
 .button_gray {
-  border:none;
-  padding:0;
-  color:#b3b3b3;
+  border: none;
+  padding: 0;
+  color: #b3b3b3;
 }
+
 .button_red {
   color: #e03a3c;
 }
