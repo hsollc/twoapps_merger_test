@@ -9,7 +9,7 @@ def index(request):
     context = None
     logineduser = False
     if request.user.is_authenticated:
-        logineduser = True
+        logineduser = request.user.last_name
     posters = PerformanceDB.objects.values_list('thumbnail', flat=True)
     pick = random.sample(list(posters), 6)
     context = {'logineduser': logineduser,
@@ -46,6 +46,21 @@ def performance(request):
     elif request.GET.get('area'):
         area_list = request.GET.getlist('area')
         performance_lists = PerformanceDB.objects.filter(area__in=area_list)  # DB에서 title에 검색 결과가 포함되어 있는 값
+        page = request.GET.get('page', 1)  # 페이지
+        paginator = Paginator(performance_lists, 10)  # 페이지 당 n개씩 보여주기
+        page_obj = paginator.get_page(page)
+
+        # url 중첩 방지를 위한 url path slicing
+        current_path = request.get_full_path()
+        current_path = current_path[current_path.find('?') + 1:]
+        if current_path.find('page') != -1:
+            current_path = current_path[:current_path.find('&page')]
+        context = {
+            'performance_list': page_obj,
+            'current_path': current_path,
+            'area_list': area_list
+        }
+        return render(request, "performance.html", context)
         print(area_list)
     # 조회 기능 사용x 시
     else:

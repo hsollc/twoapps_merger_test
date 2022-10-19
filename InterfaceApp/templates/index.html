@@ -59,6 +59,7 @@
       <a href="/index/login/" class="get-started-btn scrollto">로그인&nbsp; / &nbsp;회원가입</a>
       {% else %}
       <a href="{% url 'InterfaceApp:logout' %}" class="get-started-btn scrollto">로그아웃</a>
+      <a href="{% url 'InterfaceApp:logout' %}" class="get-started-btn scrollto">{{logineduser}}님 안녕하세요</a>
       {% endif %}
     </div>
   </header><!-- End Header -->
