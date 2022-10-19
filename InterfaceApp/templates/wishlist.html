@@ -20,42 +20,54 @@
       </div>
     </section><!-- End Breadcrumbs -->
 
-    <div>
-      <!-- DB에서 값 받아 출력하기 임시 테스트 -->
-      <table>
-        <thead>
-          <tr>
-            <th>구분</th>
-            <th>포스터</th>
-            <th>제목</th>
-            <th>시작일</th>
-            <th>마감일</th>
-            <th>장소</th>
-            <th>지역</th>
-            <th>찜 해제</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for item in wishlist %}
-          <tr>
-            <td>{{item.realmName}}</td>
-            <td><img src="{{item.thumbnail}}" style="width: 100px;"></td>
-            <td>{{item.title}}</td>
-            <td>{{item.startDate}}</td>
-            <td>{{item.endDate}}</td>
-            <td>{{item.place}}</td>
-            <td>{{item.area}}</td>
-            <td><button style="border:none; padding:0;" onclick=""><span style="color:gray;">ⓧ</span></button></td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-      <div>
+    <section id="blog" class="blog">
+      <div class="container" data-aos="fade-up">
+        <div class="row">
+          <div class="col-lg-12 entries">
+            <div>
+              <table class="performance_table">
+                <thead>
+                  <tr style="border-bottom: 1px solid black; background-color:#e6e6e6;">
+                    <th class="performance_thumbnail">썸네일</th>
+                    <th class="performance_title">제목</th>
+                    <th class="performance_startDate">시작일</th>
+                    <th class="performance_endDate">마감일</th>
+                    <th class="performance_place">장소</th>
+                    <th class="performance_area">지역</th>
+                    <th class="performance_realName">분류</th>
+                    <th>찜 해제</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for item in wish_list %}
+                  <tr id="{{item.performance_seq.seq}}" style="border-bottom: 1px solid lightgray;">
+                    <td class="performance_thumbnail"><img src="{{item.performance_seq.thumbnail}}" style="width: 100px;"></td>
+                    <td class="performance_title">{{item.PerformanceDB.title}}</td>
+                    <td class="performance_startDate">{{item.performance_seq.startDate}}</td>
+                    <td class="performance_endDate">{{item.performance_seq.endDate}}</td>
+                    <td class="performance_place">{{item.performance_seq.place}}</td>
+                    <td class="performance_area">{{item.performance_seq.area}}</td>
+                    <td class="performance_realName">{{item.performance_seq.realmName}}</td>
+                    <td><button class="button_gray" onclick="delWishlist({{item.performance_seq.seq}})">ⓧ</button></td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              <br>
+            </div>
+          </div><!-- End blog entries list -->
+
+        </div>
 
       </div>
+    </section><!-- End Blog Section -->
 
-    </div>
-
+  <script>
+    function delWishlist(id) {
+      const el = document.getElementById(id)
+      el.innerHTML = ""
+    }
+  </script>
 
   </main><!-- End #main -->
 

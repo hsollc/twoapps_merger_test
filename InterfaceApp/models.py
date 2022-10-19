@@ -17,5 +17,5 @@ class PerformanceDB(models.Model):
         return f"seq: {self.seq}, title: {self.title}, startDate: {self.startDate}, endDate: {self.endDate}, place: {self.place}, realmName: {self.realmName}, area: {self.area}, thumbnail: {self.thumbnail}, gpsX: {self.gpsX}, gpsY: {self.gpsY}"
 
 class WishlistDB(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    performance_seq = models.ForeignKey(PerformanceDB, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, db_column="user_id")
+    performance_seq = models.ForeignKey(PerformanceDB, on_delete=models.CASCADE, db_column="performance_seq")

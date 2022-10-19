@@ -48,10 +48,16 @@
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="#portfolio">Portfolio</a></li>
           <li><a class="nav-link scrollto" href="#team">About us</a></li>
           <li><a href="/index/performance/">공연/전시 정보</a></li>
           <li><a href="#">문화 관련 소식</a></li>
-          <li><a href="/index/wishlist/">위시리스트</a></li>
+          <li class="dropdown"><a href="/index/wishlist/"><span>My Page</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="/index/wishlist/">위시리스트</a></li>
+              <li><a href="{% url 'InterfaceApp:logout' %}">회원정보 수정</a></li>
+            </ul>
+          </li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -59,7 +65,6 @@
       <a href="/index/login/" class="get-started-btn scrollto">로그인&nbsp; / &nbsp;회원가입</a>
       {% else %}
       <a href="{% url 'InterfaceApp:logout' %}" class="get-started-btn scrollto">로그아웃</a>
-      <a href="{% url 'InterfaceApp:logout' %}" class="get-started-btn scrollto">{{ logineduser }}님 환영합니다</a>
       {% endif %}
     </div>
   </header><!-- End Header -->
@@ -72,7 +77,8 @@
         <div class="col-xl-6">
           <h1>Better culture experience with OnCulture<span style="color: #e03a3c;">.</span></h1>
           <h2>우리 지역의 문화생활을 즐겨보세요!</h2>
-          {% if not logineduser %}
+          {% if logineduser %}
+            <a href="#" class="btn-get-started scrollto">{{ logineduser }}님 환영합니다</a>
           {% endif %}
         </div>
       </div>
@@ -87,7 +93,7 @@
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2></h2>
+          <h2>Portfolio</h2>
           <p></p>
         </div>
 
