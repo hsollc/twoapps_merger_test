@@ -33,7 +33,7 @@ def login(request):
         else :
             return render(request, 'login.html', {'error': '※ 사용자 아이디 또는 패스워드가 틀립니다.'})
     else :
-        return render(request, 'login.html')
+        return render(request, 'login.html',)
 
 
 def performance(request):
@@ -61,7 +61,25 @@ def performance(request):
             'area_list': area_list
         }
         return render(request, "performance.html", context)
-        print(area_list)
+    # 분류 선택 기능
+    elif request.GET.get('classification'):
+        classification_list = request.GET.getlist('classification')
+        performance_lists = PerformanceDB.objects.filter(realmName__in=classification_list)  # DB에서 title에 검색 결과가 포함되어 있는 값
+        page = request.GET.get('page', 1)  # 페이지
+        paginator = Paginator(performance_lists, 10)  # 페이지 당 n개씩 보여주기
+        page_obj = paginator.get_page(page)
+
+        # url 중첩 방지를 위한 url path slicing
+        current_path = request.get_full_path()
+        current_path = current_path[current_path.find('?') + 1:]
+        if current_path.find('page') != -1:
+            current_path = current_path[:current_path.find('&page')]
+        context = {
+            'performance_list': page_obj,
+            'current_path': current_path,
+            'classification_list': classification_list
+        }
+        return render(request, "performance.html", context)
     # 조회 기능 사용x 시
     else:
         performance_lists = PerformanceDB.objects.all()
@@ -123,4 +141,7 @@ def wishlist(request):
         'wishlist': wish_list,
     }
     return render(request, 'wishlist.html', context)
+
+def mypage(request):
+    return render(request, 'mypage.html')
 
