@@ -33,7 +33,7 @@ def login(request):
         else :
             return render(request, 'login.html', {'error': '※ 사용자 아이디 또는 패스워드가 틀립니다.'})
     else :
-        return render(request, 'login.html')
+        return render(request, 'login.html',)
 
 
 def performance(request):
@@ -107,4 +107,7 @@ def wishlist(request):
         'wishlist': wishlist,
     }
     return render(request, 'wishlist.html', context)
+
+def mypage(request):
+    return render(request, 'mypage.html')
 
