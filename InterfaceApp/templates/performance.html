@@ -137,7 +137,7 @@
               </div><!-- End sidebar search formn-->
               <br>
               <h3 class="sidebar-title">기간</h3>
-              <div class="search-form">
+              <div class="search-form-period" style="text-align: center;">
                 <form action="{% url 'InterfaceApp:performance'%}" method="GET">
                   {% csrf_token %}
                   <input type="date" name="date" id="date">

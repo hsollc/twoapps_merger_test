@@ -1992,6 +1992,27 @@ section {
 }
 
 
+.blog .sidebar .search-form-period form {
+  background: #fff;
+  padding: 3px 10px;
+  position: relative;
+}
+.blog .sidebar .search-form-period form button {
+  position: absolute;
+  top: 0;
+  margin-left: 5px;
+  bottom: 0;
+  border: 0;
+  background: none;
+  font-size: 16px;
+  padding: 0 15px;
+  background: #e03a3c;
+  color: #fff;
+  transition: 0.3s;
+  border-radius: 0 4px 4px 0;
+  line-height: 0;
+}
+
 .performance_thumbnail {
 
 }
