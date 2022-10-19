@@ -9,7 +9,7 @@ def index(request):
     context = None
     logineduser = False
     if request.user.is_authenticated:
-        logineduser = True
+        logineduser = request.user.last_name
     posters = PerformanceDB.objects.values_list('thumbnail', flat=True)
     pick = random.sample(list(posters), 6)
     context = {'logineduser': logineduser,
@@ -31,7 +31,7 @@ def login(request):
             auth.login(request, user)
             return redirect("InterfaceApp:index")
         else :
-            return render(request, 'login.html', {'error': '사용자 아이디 또는 패스워드가 틀립니다.'})
+            return render(request, 'login.html', {'error': '※ 사용자 아이디 또는 패스워드가 틀립니다.'})
     else :
         return render(request, 'login.html')
 
@@ -78,9 +78,9 @@ def signup(request):
         re_password = request.POST.get('confirm_password')
         res_data = {}
         if User.objects.filter(username=useremail):
-            res_data['error'] = '이미 가입된 이메일 주소 입니다.'
+            res_data['error'] = '※ 이미 가입된 이메일 주소 입니다.'
         elif password != re_password:
-            res_data['error'] = '비밀번호가 다릅니다.'
+            res_data['error'] = '※ 비밀번호가 다릅니다.'
         else:
             user = User.objects.create_user(username=useremail,
                                             first_name=firstname,
@@ -107,3 +107,4 @@ def wishlist(request):
         'wishlist': wishlist,
     }
     return render(request, 'wishlist.html', context)
+
