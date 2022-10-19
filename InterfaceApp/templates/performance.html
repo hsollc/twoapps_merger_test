@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block css %}
+
 {% endblock %}
 
 {% block content %}
@@ -65,7 +66,7 @@
                     <td class="performance_place">{{performance.place}}</td>
                     <td class="performance_area">{{performance.area}}</td>
                     <td class="performance_realName">{{performance.realmName}}</td>
-                    <td><button style="border:none; padding:0;" onclick=""><span style="color:#b3b3b3;">♡</span></button></td>
+                    <td><button id="{{performance.seq}}" class="button_gray" onclick="addWishlist({{performance.seq}})">♡</button></td>
                   </tr>
                   {% endfor %}
                 </tbody>
@@ -275,6 +276,15 @@
     </section><!-- End Blog Section -->
 
   <script>
+      function addWishlist(id) {
+      const el = document.getElementById(id)
+      el.classList.toggle("button_red");
+
+
+
+
+
+    }
     // 지역
     var selectedAreaDict = {
       'gangwon': false,
@@ -328,6 +338,7 @@
         document.getElementsByClassName(area)[0].style.cssText = '  color: #515151; font-size: 14px; padding: 6px 14px; margin: 0 6px 8px 0; border: 1px solid #c4c4c4; display: inline-block; transition: 0.3s; background: none;'
       }
     }
+
     const url = new URL(window.location.href);
     const urlParams = url.searchParams;
     let paramsAreaValueList = [];
