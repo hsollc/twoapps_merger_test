@@ -9,7 +9,7 @@ def index(request):
     context = None
     logineduser = False
     if request.user.is_authenticated:
-        logineduser = True
+        logineduser = request.user.last_name
     posters = PerformanceDB.objects.values_list('thumbnail', flat=True)
     pick = random.sample(list(posters), 6)
     context = {'logineduser': logineduser,
@@ -31,7 +31,7 @@ def login(request):
             auth.login(request, user)
             return redirect("InterfaceApp:index")
         else :
-            return render(request, 'login.html', {'error': '사용자 아이디 또는 패스워드가 틀립니다.'})
+            return render(request, 'login.html', {'error': '※ 사용자 아이디 또는 패스워드가 틀립니다.'})
     else :
         return render(request, 'login.html')
 
@@ -46,6 +46,21 @@ def performance(request):
     elif request.GET.get('area'):
         area_list = request.GET.getlist('area')
         performance_lists = PerformanceDB.objects.filter(area__in=area_list)  # DB에서 title에 검색 결과가 포함되어 있는 값
+        page = request.GET.get('page', 1)  # 페이지
+        paginator = Paginator(performance_lists, 10)  # 페이지 당 n개씩 보여주기
+        page_obj = paginator.get_page(page)
+
+        # url 중첩 방지를 위한 url path slicing
+        current_path = request.get_full_path()
+        current_path = current_path[current_path.find('?') + 1:]
+        if current_path.find('page') != -1:
+            current_path = current_path[:current_path.find('&page')]
+        context = {
+            'performance_list': page_obj,
+            'current_path': current_path,
+            'area_list': area_list
+        }
+        return render(request, "performance.html", context)
         print(area_list)
     # 조회 기능 사용x 시
     else:
@@ -78,9 +93,9 @@ def signup(request):
         re_password = request.POST.get('confirm_password')
         res_data = {}
         if User.objects.filter(username=useremail):
-            res_data['error'] = '이미 가입된 이메일 주소 입니다.'
+            res_data['error'] = '※ 이미 가입된 이메일 주소 입니다.'
         elif password != re_password:
-            res_data['error'] = '비밀번호가 다릅니다.'
+            res_data['error'] = '※ 비밀번호가 다릅니다.'
         else:
             user = User.objects.create_user(username=useremail,
                                             first_name=firstname,
@@ -107,3 +122,4 @@ def wishlist(request):
         'wishlist': wishlist,
     }
     return render(request, 'wishlist.html', context)
+
