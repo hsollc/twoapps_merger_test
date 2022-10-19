@@ -145,7 +145,6 @@
                 {% csrf_token %}
                   <ul>
                     <li>
-                      <!-- TODO: 코드 함수화 필요 -> 딕셔너리 이용?-->
                       <a href="javascript:area('gangwon')" class="gangwon">강원</a>
                       <input type="checkbox" id="gangwon" name="area" value="강원" style="display:none;">
                     </li>
@@ -254,7 +253,7 @@
     </section><!-- End Blog Section -->
 
   <script>
-    var selectedArea = {
+    var selectedAreaDict = {
       'gangwon': false,
       'gyeonggi': false,
       'gyeongnam': false,
@@ -274,18 +273,52 @@
       'chungbuk': false,
       'etc': false
     }
+    var matchingAreaDict = {
+      '강원': 'gangwon',
+      '경기': 'gyeonggi',
+      '경남': 'gyeongnam',
+      '경북': 'gyeongbuk',
+      '광주': 'gwangju',
+      '대구': 'daegu',
+      '대전': 'daejeon',
+      '부산': 'busan',
+      '서울': 'seoul',
+      '세종': 'sejong',
+      '울산': 'ulsan',
+      '인천': 'incheon',
+      '전남': 'jeonnam',
+      '전북': 'jeonbuk',
+      '제주': 'jeju',
+      '충남': 'chungnam',
+      '충북': 'chungbuk',
+      '기타': 'etc'
+    }
 
     function area(area){
-      if(!selectedArea[area]){
+      if(!selectedAreaDict[area]){
         document.getElementById(area).checked = true;
-        selectedArea[area] = true;
+        selectedAreaDict[area] = true;
         document.getElementsByClassName(area)[0].style.cssText = 'color: #fff; border: 1px solid #e03a3c; background: #e03a3c;'
       }
       else{
         document.getElementById(area).checked = false;
-        selectedArea[area] = false;
+        selectedAreaDict[area] = false;
         document.getElementsByClassName(area)[0].style.cssText = '  color: #515151; font-size: 14px; padding: 6px 14px; margin: 0 6px 8px 0; border: 1px solid #c4c4c4; display: inline-block; transition: 0.3s; background: none;'
       }
+    }
+
+    const url = new URL(window.location.href);
+    const urlParams = url.searchParams;
+    let paramsAreaValueList = [];
+    let paramsAreaIdList = [];
+    if (urlParams.getAll('area').length >= 1){
+      paramsAreaValueList = urlParams.getAll('area');
+      for(var i=0; i<paramsAreaValueList.length; i++){
+        paramsAreaIdList[i] = matchingAreaDict[paramsAreaValueList[i]];
+      }
+    }
+    for(var i=0; i<paramsAreaIdList.length; i++){
+      area(paramsAreaIdList[i]);
     }
   </script>
 
