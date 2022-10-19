@@ -213,8 +213,8 @@
                       <input type="checkbox" id="chungbuk" name="area" value="충북" style="display:none;">
                     </li>
                     <li>
-                      <a href="javascript:area('etc')" class="etc">기타</a>
-                      <input type="checkbox" id="etc" name="area" value="기타" style="display:none;">
+                      <a href="javascript:area('etcarea')" class="etcarea">기타</a>
+                      <input type="checkbox" id="etcarea" name="area" value="기타" style="display:none;">
                     </li>
                   </ul>
                   <ul style="text-align: center;">
@@ -225,14 +225,36 @@
               <br>
               <h3 class="sidebar-title">분류</h3>
               <div class="sidebar-item tags">
-                <form>
+                <form action="{% url 'InterfaceApp:performance'%}" method="GET">
+                {% csrf_token %}
                   <ul>
-                    <li><a href="#">국악</a></li>
-                    <li><a href="#">무용</a></li>
-                    <li><a href="#">미술</a></li>
-                    <li><a href="#">연극</a></li>
-                    <li><a href="#">음악</a></li>
-                    <li><a href="#">기타</a></li>
+                    <li>
+                      <a href="javascript:classification('gukak')" class="gukak">국악</a>
+                      <input type="checkbox" id="gukak" name="classification" value="국악" style="display:none;">
+                    </li>
+                    <li>
+                      <a href="javascript:classification('dancing')" class="dancing">무용</a>
+                      <input type="checkbox" id="dancing" name="classification" value="무용" style="display:none;">
+                    </li>
+                    <li>
+                      <a href="javascript:classification('art')" class="art">미술</a>
+                      <input type="checkbox" id="art" name="classification" value="미술" style="display:none;">
+                    </li>
+                    <li>
+                      <a href="javascript:classification('play')" class="play">연극</a>
+                      <input type="checkbox" id="play" name="classification" value="연극" style="display:none;">
+                    </li>
+                    <li>
+                      <a href="javascript:classification('music')" class="music">음악</a>
+                      <input type="checkbox" id="music" name="classification" value="음악" style="display:none;">
+                    </li>
+                    <li>
+                      <a href="javascript:classification('etcclassification')" class="etcclassification">기타</a>
+                      <input type="checkbox" id="etcclassification" name="classification" value="기타" style="display:none;">
+                    </li>
+                  </ul>
+                  <ul style="text-align: center;">
+                    <li><button type="submit" onclick="#">해당 분류로 검색</button></li>
                   </ul>
                 </form>
               </div><!-- End sidebar tags-->
@@ -253,6 +275,7 @@
     </section><!-- End Blog Section -->
 
   <script>
+    // 지역
     var selectedAreaDict = {
       'gangwon': false,
       'gyeonggi': false,
@@ -271,7 +294,7 @@
       'jeju': false,
       'chungnam': false,
       'chungbuk': false,
-      'etc': false
+      'etcarea': false
     }
     var matchingAreaDict = {
       '강원': 'gangwon',
@@ -291,9 +314,8 @@
       '제주': 'jeju',
       '충남': 'chungnam',
       '충북': 'chungbuk',
-      '기타': 'etc'
+      '기타': 'etcarea'
     }
-
     function area(area){
       if(!selectedAreaDict[area]){
         document.getElementById(area).checked = true;
@@ -306,7 +328,6 @@
         document.getElementsByClassName(area)[0].style.cssText = '  color: #515151; font-size: 14px; padding: 6px 14px; margin: 0 6px 8px 0; border: 1px solid #c4c4c4; display: inline-block; transition: 0.3s; background: none;'
       }
     }
-
     const url = new URL(window.location.href);
     const urlParams = url.searchParams;
     let paramsAreaValueList = [];
@@ -319,6 +340,47 @@
     }
     for(var i=0; i<paramsAreaIdList.length; i++){
       area(paramsAreaIdList[i]);
+    }
+
+    // 분류
+    var selectedClassificationDict = {
+      'gukak': false,
+      'dancing': false,
+      'art': false,
+      'play': false,
+      'music': false,
+      'etcclassification': false
+    }
+    var matchingClassificationDict = {
+      '국악': 'gukak',
+      '무용': 'dancing',
+      '미술': 'art',
+      '연극': 'play',
+      '음악': 'music',
+      '기타': 'etcclassification'
+    }
+    function classification(classification){
+      if(!selectedClassificationDict[classification]){
+        document.getElementById(classification).checked = true;
+        selectedClassificationDict[classification] = true;
+        document.getElementsByClassName(classification)[0].style.cssText = 'color: #fff; border: 1px solid #e03a3c; background: #e03a3c;'
+      }
+      else{
+        document.getElementById(classification).checked = false;
+        selectedClassificationDict[classification] = false;
+        document.getElementsByClassName(classification)[0].style.cssText = '  color: #515151; font-size: 14px; padding: 6px 14px; margin: 0 6px 8px 0; border: 1px solid #c4c4c4; display: inline-block; transition: 0.3s; background: none;'
+      }
+    }
+    let paramsClassificationValueList = [];
+    let paramsClassificationIdList = [];
+    if (urlParams.getAll('classification').length >= 1){
+      paramsClassificationValueList = urlParams.getAll('classification');
+      for(var i=0; i<paramsClassificationValueList.length; i++){
+        paramsClassificationIdList[i] = matchingClassificationDict[paramsClassificationValueList[i]];
+      }
+    }
+    for(var i=0; i<paramsClassificationIdList.length; i++){
+      classification(paramsClassificationIdList[i]);
     }
   </script>
 
