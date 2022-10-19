@@ -59,7 +59,7 @@
       <a href="/index/login/" class="get-started-btn scrollto">로그인&nbsp; / &nbsp;회원가입</a>
       {% else %}
       <a href="{% url 'InterfaceApp:logout' %}" class="get-started-btn scrollto">로그아웃</a>
-      <a href="{% url 'InterfaceApp:logout' %}" class="get-started-btn scrollto">{{logineduser}}님 안녕하세요</a>
+      <a href="{% url 'InterfaceApp:logout' %}" class="get-started-btn scrollto">{{ logineduser }}님 환영합니다</a>
       {% endif %}
     </div>
   </header><!-- End Header -->
@@ -73,7 +73,6 @@
           <h1>Better culture experience with OnCulture<span style="color: #e03a3c;">.</span></h1>
           <h2>우리 지역의 문화생활을 즐겨보세요!</h2>
           {% if not logineduser %}
-          <a href="/index/login/" class="btn-get-started scrollto">로그인</a>
           {% endif %}
         </div>
       </div>
