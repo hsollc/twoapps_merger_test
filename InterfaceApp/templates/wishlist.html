@@ -48,12 +48,13 @@
                     <td class="performance_place">{{item.place}}</td>
                     <td class="performance_area">{{item.area}}</td>
                     <td class="performance_realName">{{item.realmName}}</td>
-                    <td><button class="button_gray" onclick="delWishlist({{item.seq}})">ⓧ</button></td>
+                    <td><form method="POST" action="/wishlist/"><button type="submit" name="performance_seq" value="{{item.seq}}" class="button_gray" onclick="delWishlist({{item.seq}})">ⓧ</button></form></td>
                   </tr>
                   {% endfor %}
                 </tbody>
               </table>
               <br>
+              <p>{{message}}</p>
             </div>
           </div><!-- End blog entries list -->
 

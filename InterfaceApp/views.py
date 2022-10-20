@@ -137,19 +137,33 @@ def apitest(request):
     return render(request, 'apitest.html')
 
 def wishlist(request):
-    #if request.user.is_authenticated:
+    context = None
     loggedin_user = request.user.id
     wish_list = []
     get_list = WishlistDB.objects.filter(user_id=loggedin_user)
+    #pk = get_list.values('id')
     for i in range(len(get_list)):
         wish_list.append(get_list[i].performance_seq)
 
-
     context = {
         'wishlist': wish_list,
+        #'pk': pk,
     }
     return render(request, 'wishlist.html', context)
 
 def mypage(request):
     return render(request, 'mypage.html')
 
+def add_wishlist(request):
+    pass
+
+def del_wishlist(request):
+
+        user_id = request.user.id
+        wish_item = request.POST.get('performance_seq')
+        print(user_id)
+        print(wish_product)
+
+        row = WishlistDB.objects.get(user_id=user_id, performance_seq=wish_item)
+        print(row)
+        row.delete()
