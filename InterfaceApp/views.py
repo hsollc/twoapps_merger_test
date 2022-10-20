@@ -167,9 +167,9 @@ def apitest(request):
 
 def wishlist(request):
     context = None
-    loggedin_user = request.user.id
+    user_id = request.user.id
     wish_list = []
-    get_list = WishlistDB.objects.filter(user_id=loggedin_user)
+    get_list = WishlistDB.objects.filter(user_id=user_id)
     #pk = get_list.values('id')
     for i in range(len(get_list)):
         wish_list.append(get_list[i].performance_seq)
@@ -180,16 +180,21 @@ def wishlist(request):
     }
     return render(request, 'wishlist.html', context)
 
-def mypage(request):
-    return render(request, 'mypage.html')
-
-def memberedit(request):
-    return render(request, 'memberedit.html')
-
+@csrf_exempt
 def add_wishlist(request):
-    pass
+    data = json.loads(request.body)
+    wish_item = data['performance_seq']
+    user_id = request.user.id
 
-
+    get_list = WishlistDB.objects.filter(user_id=user_id)
+    print(get_list.values_list('performance_seq', flat=True))
+    if wish_item not in get_list.values_list('performance_seq', flat=True):
+        row = WishlistDB(user_id=User.objects.get(pk=user_id), performance_seq=PerformanceDB.objects.get(pk=wish_item))
+        row.save()
+    #else:
+        #row = WishlistDB.objects.get(performance_seq=wish_item)
+        #row.delete()
+    return render(request, 'performance.html')
 
 @csrf_exempt
 def del_wishlist(request):
@@ -201,3 +206,11 @@ def del_wishlist(request):
     row.delete()
 
     return render(request, 'wishlist.html')
+
+def mypage(request):
+    return render(request, 'mypage.html')
+
+def memberedit(request):
+    return render(request, 'memberedit.html')
+
+

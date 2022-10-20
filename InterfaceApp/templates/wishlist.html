@@ -61,18 +61,17 @@
 
   <script>
     function delWishlist(id) {
-      console.log('asdasd')
-      const el = document.getElementById(id)
-      el.innerHTML = ""
+      const el = document.getElementById(id);
+      el.innerHTML = "";
       let req = new XMLHttpRequest();
       let data = {
         performance_seq : id
       };
       req.onload = function() {
-        console.log("performance_seq "+id+" removed from WishlistDB")
+        console.log("performance_seq "+id+" removed from the WishlistDB");
       };
       req.open("POST", "del/");
-      req.setRequestHeader('content-type', 'application/json')
+      req.setRequestHeader('content-type', 'application/json');
       req.send(JSON.stringify(data));
     };
   </script>
