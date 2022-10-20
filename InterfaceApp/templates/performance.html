@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
 
+{% block script %}
+{% endblock %}
 {% block css %}
-
+#map {
+	height: 600px;
+	width: 100%;
+}
 {% endblock %}
 
 {% block content %}
@@ -143,7 +148,7 @@
                   <input type="date" name="date" id="date">
                   <button type="submit"><i class="bi bi-search"></i></button>
                 </form>
-              <br>
+              <br><br>
               </div>
               <h3 class="sidebar-title">지역</h3>
               <div class="sidebar-item tags">
@@ -264,12 +269,40 @@
                   </ul>
                 </form>
               </div><!-- End sidebar tags-->
+              <h3 class="sidebar-title">정렬</h3>
+              <div class="sidebar-item tags">
+                <form action="{% url 'InterfaceApp:performance'%}" method="GET">
+                {% csrf_token %}
+                  <ul>
+                    <li>
+                      <a href="javascript:orderBy('distance')" class="distance">거리순 정렬</a>
+                      <input type="checkbox" id="distance" name="orderby" value="거리" style="display:none;">
+                      <input type="text" id="latitude" name="latitude" >
+                      <input type="text" id="longitude" name="longitude" >
+                    </li>
+                    <li>
+                      <a href="javascript:orderBy('title')" class="title">제목순 정렬</a>
+                      <input type="checkbox" id="title" name="orderby" value="제목" style="display:none;">
+                    </li>
+                    <li>
+                      <a href="javascript:orderBy('startdate')" class="startdate">시작일순 정렬</a>
+                      <input type="checkbox" id="startdate" name="orderby" value="시작일" style="display:none;">
+                    </li>
+                    <li>
+                      <a href="javascript:orderBy('enddate')" class="enddate">마감일순 정렬</a>
+                      <input type="checkbox" id="enddate" name="orderby" value="마감일" style="display:none;">
+                    </li>
+                  </ul>
+                  <ul style="text-align: center;">
+                    <li><button type="submit" onclick="#">해당 조건으로 정렬</button></li>
+                  </ul>
+                </form>
+              </div><!-- End sidebar tags-->
               <div class="sidebar-item tags">
                 <br><br>
                 <ul style="text-align: center;">
                   <li><a href="{% url 'InterfaceApp:performance'%}">초기화</a></li>
                 </ul>
-
               </div><!-- End sidebar tags-->
             </div><!-- End sidebar -->
 
@@ -278,21 +311,20 @@
         </div>
 
       </div>
+      <div id="map" style="width: 800px; height: 600px;"></div>
     </section><!-- End Blog Section -->
 
   <script>
-      function addWishlist(id) {
+    // WishList
+    function addWishlist(id) {
       const el = document.getElementById(id)
       el.classList.toggle("button_red");
-
-
-
-
-
     }
+
 
     // 기간
     document.getElementById('date').value = new Date().toISOString().substring(0,10);
+
 
     // 지역
     var selectedAreaDict = {
@@ -362,6 +394,7 @@
       area(paramsAreaIdList[i]);
     }
 
+
     // 분류
     var selectedClassificationDict = {
       'gukak': false,
@@ -402,6 +435,79 @@
     for(var i=0; i<paramsClassificationIdList.length; i++){
       classification(paramsClassificationIdList[i]);
     }
+
+
+    // 정렬
+    var selectedOrderByDict = {
+      'distance': false,
+      'title': false,
+      'startDate': false,
+      'endDate': false
+    }
+    var matchingOrderByDict = {
+      '거리': 'distance',
+      '제목': 'title',
+      '시작일': 'startDate',
+      '마감일': 'endDate'
+    }
+    function orderBy(orderBy){
+      if(!selectedOrderByDict[orderBy])
+        selectedOrderByDict[orderBy] = true;
+      else
+        selectedOrderByDict[orderBy] = false;
+      if(orderBy == 'distance'){
+        document.getElementById('distance').checked = true;
+        document.getElementById('title').checked = false;
+        document.getElementById('startdate').checked = false;
+        document.getElementById('enddate').checked = false;
+        document.getElementsByClassName('distance')[0].style.cssText = 'color: #fff; border: 1px solid #e03a3c; background: #e03a3c;'
+        document.getElementsByClassName('title')[0].style.cssText = 'color: #515151; font-size: 14px; padding: 6px 14px; margin: 0 6px 8px 0; border: 1px solid #c4c4c4; display: inline-block; transition: 0.3s; background: none;'
+        document.getElementsByClassName('startdate')[0].style.cssText = 'color: #515151; font-size: 14px; padding: 6px 14px; margin: 0 6px 8px 0; border: 1px solid #c4c4c4; display: inline-block; transition: 0.3s; background: none;'
+        document.getElementsByClassName('enddate')[0].style.cssText = 'color: #515151; font-size: 14px; padding: 6px 14px; margin: 0 6px 8px 0; border: 1px solid #c4c4c4; display: inline-block; transition: 0.3s; background: none;'
+      }
+      else if(orderBy == 'title'){
+        document.getElementById('distance').checked = false;
+        document.getElementById('title').checked = true;
+        document.getElementById('startdate').checked = false;
+        document.getElementById('enddate').checked = false;
+        document.getElementsByClassName('distance')[0].style.cssText = 'color: #515151; font-size: 14px; padding: 6px 14px; margin: 0 6px 8px 0; border: 1px solid #c4c4c4; display: inline-block; transition: 0.3s; background: none;'
+        document.getElementsByClassName('title')[0].style.cssText = 'color: #fff; border: 1px solid #e03a3c; background: #e03a3c;'
+        document.getElementsByClassName('startdate')[0].style.cssText = 'color: #515151; font-size: 14px; padding: 6px 14px; margin: 0 6px 8px 0; border: 1px solid #c4c4c4; display: inline-block; transition: 0.3s; background: none;'
+        document.getElementsByClassName('enddate')[0].style.cssText = 'color: #515151; font-size: 14px; padding: 6px 14px; margin: 0 6px 8px 0; border: 1px solid #c4c4c4; display: inline-block; transition: 0.3s; background: none;'
+      }
+      else if(orderBy == 'startdate'){
+        document.getElementById('distance').checked = false;
+        document.getElementById('title').checked = false;
+        document.getElementById('startdate').checked = true;
+        document.getElementById('enddate').checked = false;
+        document.getElementsByClassName('distance')[0].style.cssText = 'color: #515151; font-size: 14px; padding: 6px 14px; margin: 0 6px 8px 0; border: 1px solid #c4c4c4; display: inline-block; transition: 0.3s; background: none;'
+        document.getElementsByClassName('title')[0].style.cssText = 'color: #515151; font-size: 14px; padding: 6px 14px; margin: 0 6px 8px 0; border: 1px solid #c4c4c4; display: inline-block; transition: 0.3s; background: none;'
+        document.getElementsByClassName('startdate')[0].style.cssText = 'color: #fff; border: 1px solid #e03a3c; background: #e03a3c;'
+        document.getElementsByClassName('enddate')[0].style.cssText = 'color: #515151; font-size: 14px; padding: 6px 14px; margin: 0 6px 8px 0; border: 1px solid #c4c4c4; display: inline-block; transition: 0.3s; background: none;'
+      }
+      else if(orderBy == 'enddate'){
+        document.getElementById('distance').checked = false;
+        document.getElementById('title').checked = false;
+        document.getElementById('startdate').checked = false;
+        document.getElementById('enddate').checked = true;
+        document.getElementsByClassName('distance')[0].style.cssText = 'color: #515151; font-size: 14px; padding: 6px 14px; margin: 0 6px 8px 0; border: 1px solid #c4c4c4; display: inline-block; transition: 0.3s; background: none;'
+        document.getElementsByClassName('title')[0].style.cssText = 'color: #515151; font-size: 14px; padding: 6px 14px; margin: 0 6px 8px 0; border: 1px solid #c4c4c4; display: inline-block; transition: 0.3s; background: none;'
+        document.getElementsByClassName('startdate')[0].style.cssText = 'color: #515151; font-size: 14px; padding: 6px 14px; margin: 0 6px 8px 0; border: 1px solid #c4c4c4; display: inline-block; transition: 0.3s; background: none;'
+        document.getElementsByClassName('enddate')[0].style.cssText = 'color: #fff; border: 1px solid #e03a3c; background: #e03a3c;'
+      }
+    }
+    let paramsOrderByValueList = [];
+    let paramsOrderByIdList = [];
+    if (urlParams.getAll('orderby').length >= 1){
+      paramsOrderByValueList = urlParams.getAll('orderby');
+      for(var i=0; i<paramsOrderByValueList.length; i++){
+        paramsOrderByIdList[i] = matchingOrderByDict[paramsOrderByValueList[i]];
+      }
+    }
+    for(var i=0; i<paramsOrderByIdList.length; i++){
+      orderBy(paramsOrderByIdList[i]);
+    }
+
   </script>
 
   </main><!-- End #main -->
