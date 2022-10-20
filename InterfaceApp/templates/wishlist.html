@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block content %}
+
   <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
@@ -48,13 +49,13 @@
                     <td class="performance_place">{{item.place}}</td>
                     <td class="performance_area">{{item.area}}</td>
                     <td class="performance_realName">{{item.realmName}}</td>
-                    <td><form method="POST" action="/wishlist/"><button type="submit" name="performance_seq" value="{{item.seq}}" class="button_gray" onclick="delWishlist({{item.seq}})">ⓧ</button></form></td>
+                    <td><button class="button_gray" onclick="delWishlist({{item.seq}})">ⓧ</button></td>
                   </tr>
                   {% endfor %}
                 </tbody>
               </table>
               <br>
-              <p>{{message}}</p>
+
             </div>
           </div><!-- End blog entries list -->
 
@@ -67,7 +68,17 @@
     function delWishlist(id) {
       const el = document.getElementById(id)
       el.innerHTML = ""
-    }
+      let req = new XMLHttpRequest();
+      let data = {
+        performance_seq : id
+      };
+      req.onload = function() {
+        console.log("performance_seq "+id+" 삭제")
+      };
+      req.open("POST", "del/");
+      req.setRequestHeader('content-type', 'application/json')
+      req.send(JSON.stringify(data));
+    };
   </script>
 
   </main><!-- End #main -->

@@ -4,6 +4,9 @@ from django.contrib import auth
 from .models import PerformanceDB, WishlistDB
 from django.core.paginator import Paginator
 import random
+import json
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
 def index(request):
     context = None
@@ -157,13 +160,16 @@ def mypage(request):
 def add_wishlist(request):
     pass
 
+
+
+@csrf_exempt
 def del_wishlist(request):
+    data = json.loads(request.body)
 
-        user_id = request.user.id
-        wish_item = request.POST.get('performance_seq')
-        print(user_id)
-        print(wish_product)
+    user_id = request.user.id
+    wish_item = data['performance_seq']
 
-        row = WishlistDB.objects.get(user_id=user_id, performance_seq=wish_item)
-        print(row)
-        row.delete()
+    row = WishlistDB.objects.get(user_id=user_id, performance_seq=wish_item)
+    row.delete()
+
+    return render(request, 'wishlist.html')
