@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block content %}
+{% load static %}
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+          <a href="/index/">Home</a>
+          <h1>Recent world Culture News</h1>
+      </div>
+      <div class="row justify-content-between">
+        {% for new, des, i, url in mylist %}
+        <a href={{url}} style="align:left;"><h4>LinkToSite</h4></a><br>
+        <h3 style="align=left">{{news}}</h3>
+        <img src={{i}} alt="" style="margin-left;100px; height:200px; align=left">
+        <br>
+        <h4 style="margin-left:100px; align=left ">{{des}}</h4><br>
+        <hr>
+        {% endfor %}
+      </div>
+    </section>
+  </main>
