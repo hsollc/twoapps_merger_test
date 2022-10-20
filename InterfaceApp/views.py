@@ -180,17 +180,18 @@ def wishlist(request):
 def mypage(request):
     return render(request, 'mypage.html')
 
-
+def memberedit(request):
+    return render(request, 'memberedit.html')
 def add_wishlist(request):
     pass
 
 def del_wishlist(request):
-
-        user_id = request.user.id
-        wish_item = request.POST.get('performance_seq')
-        print(user_id)
-        print(wish_product)
-
-        row = WishlistDB.objects.get(user_id=user_id, performance_seq=wish_item)
-        print(row)
-        row.delete()
+    print(request.POST.get('performance_seq'))
+        # user_id = request.user.id
+        # wish_item = request.POST.get('performance_seq')
+        # #print(user_id)
+        # #print(wish_product)
+        #
+        # row = WishlistDB.objects.get(user_id=user_id, performance_seq=wish_item)
+        # print(row)
+        # row.delete()
