@@ -6,13 +6,10 @@ from django.contrib import auth
 from .models import PerformanceDB, WishlistDB
 from django.core.paginator import Paginator
 import random
-<<<<<<< HEAD
 import math
-=======
 import json
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
->>>>>>> f86b8ef0274a4e90b21d30cc9453986b3d003c81
+from django.views.decorators.csrf import csrf_exemp
 
 def index(request):
     context = None
