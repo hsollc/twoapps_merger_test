@@ -2203,10 +2203,11 @@ section {
 }
 
 .button_gray {
+  color: #b3b3b3;
   border: none;
   padding: 0;
-  color: #b3b3b3;
   background: none;
+  font-weight: bold;
 }
 
 .button_red {
