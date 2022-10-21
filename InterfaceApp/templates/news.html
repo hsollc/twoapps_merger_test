@@ -1,247 +1,246 @@
-{% extends 'base.html' %}
+{% load static %}
+<html lang="ko" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>HSOLLC</title>
 
-{% block css %}
-{% endblock %}
+    <link rel="stylesheet" href="{% static 'blog/bootstrap/bootstrap.min.css' %}" media="screen">
+    <link rel="stylesheet" href="{% static 'single_pages/css/landing.css' %}?after" media="screen">
+    <script src="https://kit.fontawesome.com/726bbd6862.js" crossorigin="anonymous"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6YXK7R2G82"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-{% block content %}
+  gtag('config', 'G-6YXK7R2G82');
+</script>
+<meta name="google-site-verification" content="GwzEhfyy6JWQUOyoO8zWdq0NXO0LbtbHkj7yaOPuwJA" />
 
-  <main id="main">
+</head>
+<body>
+{% include 'blog/navbar.html' %}
+<div id="google_translate_element"></div>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script type="text/javascript">
+	function googleTranslateElementInit() {new google.translate.TranslateElement({pageLanguage: 'ko',autoDisplay: false}, 'google_translate_element');}
+</script>
 
-    <!-- ======= Breadcrumbs ======= -->
-    <section class="breadcrumbs">
-      <div class="container">
 
-        <ol>
-          <li><a href="/index/">Home</a></li>
-          <li>News</li>
-        </ol>
-        <h2>News</h2>
+  <audio autoplay loop>
+<!--      <source src="./music/johann_sebastian_bach_air.mp3">-->
+    </audio>
+<!--<section>-->
+<!--<div class="container">-->
+<!--        <div class="row justify-content-between">-->
+<!--        <div class="col-lg-6 text-light">-->
+<!--            <h1 class="mt-5">US TOP 10 News</h1>-->
+<!--        </div>-->
 
-      </div>
-    </section><!-- End Breadcrumbs -->
+<!--        <div class="row justify-content-between">-->
+<!--        {% for newsline in newslines %}-->
+<!--        <h3>{{ newsline }}</h3>-->
+<!--        {% endfor %}-->
+<!--        </div>-->
+<!--        </div>-->
+<!--</div>-->
+<!--</section>-->
 
-    <!-- ======= Blog Section ======= -->
-    <section id="blog" class="blog">
-      <div class="container" data-aos="fade-up">
+<section>
+        <div class="row justify-content-between">
+        <div class="col-lg-6 text-light">
+            <h1 class="mt-5">Recent World Culture News</h1>
+            <br>
+        </div>
+        <div class="row justify-content-between">
+        {% for new, des, i, url in mylist %}
+            <a href={{url}} style="align:left;"><h4>LinktoSite</h4></a><br>
+            <h3 style="align=left">{{new}}</h3>
+            <img src="{{i}}" alt="" style="margin-left:100px;width:200px; height:200px; align=left">
+            <br>
+            <h4 style="margin-left:100px; align=left">{{des}}</h4><br>
+            <hr>
+        {% endfor %}
+        </div>
+        </div>
+</section>
 
-        <div class="row">
+<br><br> <div class="container">
+            <div class="title-box left">Type To Speak</div>
+            <form id="form">
+            <div class="form-group">
+            <textarea
+            class="textarea-cont margin-radius"
+            id="text-input"
+            cols="130"
+            rows="3"
+            placeholder="Write, Type or Copy and Paste any sentences to be translated..."
+            ></textarea>
+            <div class="container less-width">
+            <label for="rate" class="text-size center label-pos margin-radius">Rate</label>
+            <div id="rate-value" class="float-right">1</div>
+            <input type="range" class="input-range margin-radius" id="rate" min="0" max="2" value="1" step="0.1">
 
-          <div class="col-lg-8 entries">
-
-            <article class="entry">
-
-              <div class="entry-img">
-                <img src="assets/img/blog/blog-1.jpg" alt="" class="img-fluid">
-              </div>
-
-              <h2 class="entry-title">
-                <a href="blog-single.html">Dolorum optio tempore voluptas dignissimos cumque fuga qui quibusdam quia</a>
-              </h2>
-
-              <div class="entry-meta">
-                <ul>
-                  <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-single.html">John Doe</a></li>
-                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-single.html"><time datetime="2020-01-01">Jan 1, 2020</time></a></li>
-                  <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-single.html">12 Comments</a></li>
-                </ul>
-              </div>
-
-              <div class="entry-content">
-                <p>
-                  Similique neque nam consequuntur ad non maxime aliquam quas. Quibusdam animi praesentium. Aliquam et laboriosam eius aut nostrum quidem aliquid dicta.
-                  Et eveniet enim. Qui velit est ea dolorem doloremque deleniti aperiam unde soluta. Est cum et quod quos aut ut et sit sunt. Voluptate porro consequatur assumenda perferendis dolore.
-                </p>
-                <div class="read-more">
-                  <a href="blog-single.html">Read More</a>
-                </div>
-              </div>
-
-            </article><!-- End blog entry -->
-
-            <article class="entry">
-
-              <div class="entry-img">
-                <img src="assets/img/blog/blog-2.jpg" alt="" class="img-fluid">
-              </div>
-
-              <h2 class="entry-title">
-                <a href="blog-single.html">Nisi magni odit consequatur autem nulla dolorem</a>
-              </h2>
-
-              <div class="entry-meta">
-                <ul>
-                  <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-single.html">John Doe</a></li>
-                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-single.html"><time datetime="2020-01-01">Jan 1, 2020</time></a></li>
-                  <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-single.html">12 Comments</a></li>
-                </ul>
-              </div>
-
-              <div class="entry-content">
-                <p>
-                  Incidunt voluptate sit temporibus aperiam. Quia vitae aut sint ullam quis illum voluptatum et. Quo libero rerum voluptatem pariatur nam.
-                  Ad impedit qui officiis est in non aliquid veniam laborum. Id ipsum qui aut. Sit aliquam et quia molestias laboriosam. Tempora nam odit omnis eum corrupti qui aliquid excepturi molestiae. Facilis et sint quos sed voluptas. Maxime sed tempore enim omnis non alias odio quos distinctio.
-                </p>
-                <div class="read-more">
-                  <a href="blog-single.html">Read More</a>
-                </div>
-              </div>
-
-            </article><!-- End blog entry -->
-
-            <article class="entry">
-
-              <div class="entry-img">
-                <img src="assets/img/blog/blog-3.jpg" alt="" class="img-fluid">
-              </div>
-
-              <h2 class="entry-title">
-                <a href="blog-single.html">Possimus soluta ut id suscipit ea ut. In quo quia et soluta libero sit sint.</a>
-              </h2>
-
-              <div class="entry-meta">
-                <ul>
-                  <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-single.html">John Doe</a></li>
-                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-single.html"><time datetime="2020-01-01">Jan 1, 2020</time></a></li>
-                  <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-single.html">12 Comments</a></li>
-                </ul>
-              </div>
-
-              <div class="entry-content">
-                <p>
-                  Aut iste neque ut illum qui perspiciatis similique recusandae non. Fugit autem dolorem labore omnis et. Eum temporibus fugiat voluptate enim tenetur sunt omnis.
-                  Doloremque est saepe laborum aut. Ipsa cupiditate ex harum at recusandae nesciunt. Ut dolores velit.
-                </p>
-                <div class="read-more">
-                  <a href="blog-single.html">Read More</a>
-                </div>
-              </div>
-
-            </article><!-- End blog entry -->
-
-            <article class="entry">
-
-              <div class="entry-img">
-                <img src="assets/img/blog/blog-4.jpg" alt="" class="img-fluid">
-              </div>
-
-              <h2 class="entry-title">
-                <a href="blog-single.html">Non rem rerum nam cum quo minus. Dolor distinctio deleniti explicabo eius exercitationem.</a>
-              </h2>
-
-              <div class="entry-meta">
-                <ul>
-                  <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-single.html">John Doe</a></li>
-                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-single.html"><time datetime="2020-01-01">Jan 1, 2020</time></a></li>
-                  <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-single.html">12 Comments</a></li>
-                </ul>
-              </div>
-
-              <div class="entry-content">
-                <p>
-                  Aspernatur rerum perferendis et sint. Voluptates cupiditate voluptas atque quae. Rem veritatis rerum enim et autem. Saepe atque cum eligendi eaque iste omnis a qui.
-                  Quia sed sunt. Ea asperiores expedita et et delectus voluptates rerum. Id saepe ut itaque quod qui voluptas nobis porro rerum. Quam quia nesciunt qui aut est non omnis. Inventore occaecati et quaerat magni itaque nam voluptas. Voluptatem ducimus sint id earum ut nesciunt sed corrupti nemo.
-                </p>
-                <div class="read-more">
-                  <a href="blog-single.html">Read More</a>
-                </div>
-              </div>
-
-            </article><!-- End blog entry -->
-
-            <div class="blog-pagination">
-              <ul class="justify-content-center">
-                <li><a href="#">1</a></li>
-                <li class="active"><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-              </ul>
+            <label for="pitch" class="text-size center label-pos margin-radius">Pitch</label>
+            <div class="float-right" id="pitch-value">1</div>
+            <input type="range" class="input-range margin-radius" id="pitch" min="0" max="2" value="1" step="0.1">
+            </div>
+            <label class="text-size speaker-select-label">Choose the speaker:</label>
+            <select id="voice-select" class="form-control margin-radius"></select>
+            </div>
+            <button class="btn margin-radius">Speak</button>
+            </form>
             </div>
 
-          </div><!-- End blog entries list -->
+<script  type="text/javascript">
+    //  Init SpeechSynth API
+const synth = window.speechSynthesis;
 
-          <div class="col-lg-4">
+//  DOM elements
+const textForm = document.querySelector("#form");
+const textInput = document.querySelector("#text-input");
+const voiceSelect = document.querySelector("#voice-select");
+const rate = document.querySelector("#rate");
+const rateValue = document.querySelector("#rate-value");
+const pitch = document.querySelector("#pitch");
+const pitchValue = document.querySelector("#pitch-value");
 
-            <div class="sidebar">
+// Init voices array
+let voices = [];
 
-              <h3 class="sidebar-title">Search</h3>
-              <div class="sidebar-item search-form">
-                <form action="">
-                  <input type="text">
-                  <button type="submit"><i class="bi bi-search"></i></button>
-                </form>
-              </div><!-- End sidebar search formn-->
+const getVoices = () => {
+  voices = synth.getVoices();
 
-              <h3 class="sidebar-title">Categories</h3>
-              <div class="sidebar-item categories">
-                <ul>
-                  <li><a href="#">General <span>(25)</span></a></li>
-                  <li><a href="#">Lifestyle <span>(12)</span></a></li>
-                  <li><a href="#">Travel <span>(5)</span></a></li>
-                  <li><a href="#">Design <span>(22)</span></a></li>
-                  <li><a href="#">Creative <span>(8)</span></a></li>
-                  <li><a href="#">Educaion <span>(14)</span></a></li>
-                </ul>
-              </div><!-- End sidebar categories-->
+  // Loop through voices and create an option for each one
+  voices.forEach(voice => {
+    // Create an option element
+    const option = document.createElement('option');
+    // Fill the option with voices and lang
+    option.textContent = voice.name + '(' + voice.lang + ')';
 
-              <h3 class="sidebar-title">Recent Posts</h3>
-              <div class="sidebar-item recent-posts">
-                <div class="post-item clearfix">
-                  <img src="assets/img/blog/blog-recent-1.jpg" alt="">
-                  <h4><a href="blog-single.html">Nihil blanditiis at in nihil autem</a></h4>
-                  <time datetime="2020-01-01">Jan 1, 2020</time>
-                </div>
+    // Set needed option attributes
+    option.setAttribute("data-lang", voice.lang);
+    option.setAttribute("data-name", voice.name);
+    voiceSelect.appendChild(option);
+  });
+};
 
-                <div class="post-item clearfix">
-                  <img src="assets/img/blog/blog-recent-2.jpg" alt="">
-                  <h4><a href="blog-single.html">Quidem autem et impedit</a></h4>
-                  <time datetime="2020-01-01">Jan 1, 2020</time>
-                </div>
+getVoices();
+if (synth.onvoiceschanged !== undefined) {
+  synth.onvoiceschanged = getVoices;
+}
 
-                <div class="post-item clearfix">
-                  <img src="assets/img/blog/blog-recent-3.jpg" alt="">
-                  <h4><a href="blog-single.html">Id quia et et ut maxime similique occaecati ut</a></h4>
-                  <time datetime="2020-01-01">Jan 1, 2020</time>
-                </div>
+// Speak
+const speak = () => {
+  // Check if speaking
+  if (synth.speaking) {
+    console.error("Already Speaking...");
+    return;
+  }
+  if (textInput.value !== "") {
+    // Get speak text
+    const speakText = new SpeechSynthesisUtterance(textInput.value);
+    // Speak end
+    speakText.onend = (e) => {
+      console.log("Done speaking...");
+    };
 
-                <div class="post-item clearfix">
-                  <img src="assets/img/blog/blog-recent-4.jpg" alt="">
-                  <h4><a href="blog-single.html">Laborum corporis quo dara net para</a></h4>
-                  <time datetime="2020-01-01">Jan 1, 2020</time>
-                </div>
+    // Speak error
+    speakText.onerror = (e) => {
+      console.error("Something went wrong!");
+    };
 
-                <div class="post-item clearfix">
-                  <img src="assets/img/blog/blog-recent-5.jpg" alt="">
-                  <h4><a href="blog-single.html">Et dolores corrupti quae illo quod dolor</a></h4>
-                  <time datetime="2020-01-01">Jan 1, 2020</time>
-                </div>
+    //  Selected voice
+    const selectedVoice =
+      voiceSelect.selectedOptions[0].getAttribute("data-name");
 
-              </div><!-- End sidebar recent posts-->
+    //  Loop through voices
+    voices.forEach((voice) => {
+      if (voice.name === selectedVoice) {
+        speakText.voice = voice;
+      }
+    });
 
-              <h3 class="sidebar-title">Tags</h3>
-              <div class="sidebar-item tags">
-                <ul>
-                  <li><a href="#">App</a></li>
-                  <li><a href="#">IT</a></li>
-                  <li><a href="#">Business</a></li>
-                  <li><a href="#">Mac</a></li>
-                  <li><a href="#">Design</a></li>
-                  <li><a href="#">Office</a></li>
-                  <li><a href="#">Creative</a></li>
-                  <li><a href="#">Studio</a></li>
-                  <li><a href="#">Smart</a></li>
-                  <li><a href="#">Tips</a></li>
-                  <li><a href="#">Marketing</a></li>
-                </ul>
-              </div><!-- End sidebar tags-->
+    // Set pitch and rate
+    speakText.rate = rate.value;
+    speakText.pitch = pitch.value;
+    // Speak
+    synth.speak(speakText)
+  }
+};
 
-            </div><!-- End sidebar -->
 
-          </div><!-- End blog sidebar -->
+//  Event LISTENERS
 
-        </div>
+// Text form submit
+textForm.addEventListener("submit",e => {
+  e.preventDefault();
+  speak();
+  textInput.blur();
+});
 
-      </div>
-    </section><!-- End Blog Section -->
+// Rate value change
+rate.addEventListener("change",e => rateValue.textContent = rate.value);
 
-  </main><!-- End #main -->
+// Pitch value change
+pitch.addEventListener("change",e => pitchValue.textContent = pitch.value);
 
-{% endblock %}
+// voice select change
+voiceSelect.addEventListener("change",e => {
+  speak()
+  console.log(speak);
+
+});
+</script>
+
+<div class="fixed-bottom">
+    {% include 'blog/footer.html' %}
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+<!--chatting tag-->
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6329b5b654f06e12d895cc2a/1gdderkmj';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>
+<!--comments tag-->
+<div id="disqus_thread"></div>
+<script>
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://web1-xs4erwk08l.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>

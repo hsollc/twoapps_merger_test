@@ -144,9 +144,17 @@ def performance(request):
     if current_path.find('page') != -1:
         current_path = current_path[:current_path.find('&page')]
 
+    # WishlistDB 등록 여부 확인
+    #if request.user.is_authenticated:
+    #    user_id = request.user.id
+    #    seqs = WishlistDB.objects.filter(user_id=user_id).values_list('performance_seq', flat=True)
+    #else:
+    #    seqs = None
+
     context = {
         'performance_list': page_obj,
         'current_path': current_path,
+    #    'seqs': seqs
     }
     return render(request, "performance.html", context)
 
@@ -185,13 +193,12 @@ def wishlist(request):
     user_id = request.user.id
     wish_list = []
     get_list = WishlistDB.objects.filter(user_id=user_id)
-    #pk = get_list.values('id')
+
     for i in range(len(get_list)):
         wish_list.append(get_list[i].performance_seq)
 
     context = {
         'wishlist': wish_list,
-        #'pk': pk,
     }
     return render(request, 'wishlist.html', context)
 
@@ -202,14 +209,16 @@ def add_wishlist(request):
     user_id = request.user.id
 
     get_list = WishlistDB.objects.filter(user_id=user_id)
-    print(get_list.values_list('performance_seq', flat=True))
+    #print(get_list.values_list('performance_seq', flat=True))
     if wish_item not in get_list.values_list('performance_seq', flat=True):
         row = WishlistDB(user_id=User.objects.get(pk=user_id), performance_seq=PerformanceDB.objects.get(pk=wish_item))
         row.save()
-    #else:
+        result = {'result': f"performance_seq {wish_item} added to the WishlistDB"}
+    else:
         #row = WishlistDB.objects.get(performance_seq=wish_item)
         #row.delete()
-    return render(request, 'performance.html')
+        result = {'result': f"performance_seq {wish_item} is already exist in the WishlistDB"}
+    return JsonResponse(result, content_type='application/json')
 
 @csrf_exempt
 def del_wishlist(request):
@@ -227,3 +236,48 @@ def mypage(request):
 
 def profile(request):
     return render(request, 'profile.html')
+
+import requests
+import json
+import os
+from newsapi import NewsApiClient
+from datetime import datetime, timedelta
+os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] ="True"
+def news(request):
+    newsapi = NewsApiClient(api_key="c66416a0443445a896fe5e0eff1b1bc5")
+    # topheadlines = newsapi.get_top_headlines(sources='bbc-news')
+    now = datetime.now()
+    before_one_day =  now - timedelta(days=25)
+
+    all_articles = newsapi.get_everything(q='art',
+                                          # sources='bbc-news,the-verge',
+                                          # domains='bbc.co.uk,techcrunch.com',
+                                          from_param=before_one_day,
+                                          to=now,
+                                          language='en',
+                                          sort_by='relevancy',
+                                          # page=1
+                                          )
+
+    # articles = topheadlines['articles']
+    articles = all_articles['articles']
+
+    desc = []
+    news = []
+    img = []
+    url = []
+
+    for i in range(len(articles)):
+        if i < 10:
+            myarticles = articles[i]
+
+            news.append(myarticles['title'])
+            desc.append(myarticles['description'])
+            img.append(myarticles['urlToImage'])
+            url.append(myarticles['url'])
+
+    mylist = zip(news, desc, img, url)
+
+
+    return render(request, 'single_pages/cultureNews.html', context={"mylist":mylist})
+
