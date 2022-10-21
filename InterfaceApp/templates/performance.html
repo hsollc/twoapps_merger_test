@@ -53,7 +53,9 @@
                     <td class="performance_place">{{performance.place}}</td>
                     <td class="performance_area">{{performance.area}}</td>
                     <td class="performance_realName">{{performance.realmName}}</td>
-                    <td><button id="{{performance.seq}}" class="button_gray" onclick="addWishlist({{performance.seq}})">♡</button></td>
+                    <td>
+                      <button id="{{performance.seq}}" class="button_gray" onclick="addWishlist({{performance.seq}})">♡</button>
+                    </td>
                   </tr>
                   {% endfor %}
                 </tbody>
@@ -307,7 +309,8 @@
         performance_seq : id
       };
       req.onload = function() {
-        console.log("performance_seq "+id+" added or removed");
+        let result = JSON.parse(req.responseText);
+        console.log(result['result']);
       };
       req.open("POST", "/index/wishlist/add/");
       req.setRequestHeader('content-type', 'application/json');
