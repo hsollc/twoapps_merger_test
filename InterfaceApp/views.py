@@ -6,7 +6,13 @@ from django.contrib import auth
 from .models import PerformanceDB, WishlistDB
 from django.core.paginator import Paginator
 import random
+<<<<<<< HEAD
 import math
+=======
+import json
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+>>>>>>> f86b8ef0274a4e90b21d30cc9453986b3d003c81
 
 def index(request):
     context = None
@@ -177,9 +183,9 @@ def apitest(request):
 
 def wishlist(request):
     context = None
-    loggedin_user = request.user.id
+    user_id = request.user.id
     wish_list = []
-    get_list = WishlistDB.objects.filter(user_id=loggedin_user)
+    get_list = WishlistDB.objects.filter(user_id=user_id)
     #pk = get_list.values('id')
     for i in range(len(get_list)):
         wish_list.append(get_list[i].performance_seq)
@@ -190,19 +196,35 @@ def wishlist(request):
     }
     return render(request, 'wishlist.html', context)
 
+@csrf_exempt
+def add_wishlist(request):
+    data = json.loads(request.body)
+    wish_item = data['performance_seq']
+    user_id = request.user.id
+
+    get_list = WishlistDB.objects.filter(user_id=user_id)
+    print(get_list.values_list('performance_seq', flat=True))
+    if wish_item not in get_list.values_list('performance_seq', flat=True):
+        row = WishlistDB(user_id=User.objects.get(pk=user_id), performance_seq=PerformanceDB.objects.get(pk=wish_item))
+        row.save()
+    #else:
+        #row = WishlistDB.objects.get(performance_seq=wish_item)
+        #row.delete()
+    return render(request, 'performance.html')
+
+@csrf_exempt
+def del_wishlist(request):
+    data = json.loads(request.body)
+    wish_item = data['performance_seq']
+    user_id = request.user.id
+
+    row = WishlistDB.objects.get(user_id=user_id, performance_seq=wish_item)
+    row.delete()
+
+    return render(request, 'wishlist.html')
+
 def mypage(request):
     return render(request, 'mypage.html')
 
-def add_wishlist(request):
-    pass
-
-def del_wishlist(request):
-    print(request.POST.get('performance_seq'))
-        # user_id = request.user.id
-        # wish_item = request.POST.get('performance_seq')
-        # #print(user_id)
-        # #print(wish_product)
-        #
-        # row = WishlistDB.objects.get(user_id=user_id, performance_seq=wish_item)
-        # print(row)
-        # row.delete()
+def profile(request):
+    return render(request, 'profile.html')

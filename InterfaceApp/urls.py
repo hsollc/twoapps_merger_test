@@ -11,6 +11,8 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('apitest/', views.apitest, name='apitest'),
     path('wishlist/', views.wishlist, name='wishlist'),
-    path('wishlist/del', views.del_wishlist, name='wishlist_d'),
-    path('wishlist/add', views.add_wishlist, name='wishlist_c'),
+
+    path('wishlist/del/', views.del_wishlist, name='wishlist_d'),
+    path('wishlist/add/', views.add_wishlist, name='wishlist_c'),
+    path('profile/', views.profile, name='profile'),
 ]
