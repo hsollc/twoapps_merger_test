@@ -9,7 +9,7 @@ import random
 import math
 import json
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exemp
+from django.views.decorators.csrf import csrf_exempt
 
 def index(request):
     context = None
@@ -63,6 +63,7 @@ def performance(request):
 
         # url 중첩 방지를 위한 url path slicing
         current_path = request.get_full_path()
+        print(current_path)
         current_path = current_path[current_path.find('?') + 1:]
         if current_path.find('page') != -1:
             current_path = current_path[:current_path.find('&page')]
@@ -82,6 +83,7 @@ def performance(request):
 
         # url 중첩 방지를 위한 url path slicing
         current_path = request.get_full_path()
+        print(current_path)
         current_path = current_path[current_path.find('?') + 1:]
         if current_path.find('page') != -1:
             current_path = current_path[:current_path.find('&page')]
