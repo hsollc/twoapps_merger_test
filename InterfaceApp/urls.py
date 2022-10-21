@@ -13,5 +13,4 @@ urlpatterns = [
     path('wishlist/', views.wishlist, name='wishlist'),
     path('wishlist/del', views.del_wishlist, name='wishlist_d'),
     path('wishlist/add', views.add_wishlist, name='wishlist_c'),
-    path('memberedit/', views.memberedit, name='memberedit'),
 ]

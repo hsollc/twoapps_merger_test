@@ -3,10 +3,7 @@
 {% block script %}
 {% endblock %}
 {% block css %}
-#map {
-	height: 600px;
-	width: 100%;
-}
+
 {% endblock %}
 
 {% block content %}
@@ -277,8 +274,8 @@
                     <li>
                       <a href="javascript:orderBy('distance')" class="distance">거리순 정렬</a>
                       <input type="checkbox" id="distance" name="orderby" value="거리" style="display:none;">
-                      <input type="text" id="latitude" name="latitude" >
-                      <input type="text" id="longitude" name="longitude" >
+                      <input type="text" id="lat" name="latitude" style="display: none;">
+                      <input type="text" id="lng" name="longitude" style="display: none;">
                     </li>
                     <li>
                       <a href="javascript:orderBy('title')" class="title">제목순 정렬</a>
@@ -311,9 +308,7 @@
         </div>
 
       </div>
-      <div id="map" style="width: 800px; height: 600px;"></div>
     </section><!-- End Blog Section -->
-
   <script>
     // WishList
     function addWishlist(id) {
@@ -464,6 +459,8 @@
         document.getElementsByClassName('title')[0].style.cssText = 'color: #515151; font-size: 14px; padding: 6px 14px; margin: 0 6px 8px 0; border: 1px solid #c4c4c4; display: inline-block; transition: 0.3s; background: none;'
         document.getElementsByClassName('startdate')[0].style.cssText = 'color: #515151; font-size: 14px; padding: 6px 14px; margin: 0 6px 8px 0; border: 1px solid #c4c4c4; display: inline-block; transition: 0.3s; background: none;'
         document.getElementsByClassName('enddate')[0].style.cssText = 'color: #515151; font-size: 14px; padding: 6px 14px; margin: 0 6px 8px 0; border: 1px solid #c4c4c4; display: inline-block; transition: 0.3s; background: none;'
+
+
       }
       else if(orderBy == 'title'){
         document.getElementById('distance').checked = false;
@@ -508,6 +505,10 @@
       orderBy(paramsOrderByIdList[i]);
     }
 
+    navigator.geolocation.getCurrentPosition(function(position) {
+        document.getElementById('lat').value = position.coords.latitude
+        document.getElementById('lng').value = position.coords.longitude
+    });
   </script>
 
   </main><!-- End #main -->

@@ -1,9 +1,12 @@
+from collections import OrderedDict
+
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import auth
 from .models import PerformanceDB, WishlistDB
 from django.core.paginator import Paginator
 import random
+import math
 
 def index(request):
     context = None
@@ -43,7 +46,7 @@ def performance(request):
         performance_search = request.GET.get('performance_search')     # 검색 결과 받아오기
         performance_lists = PerformanceDB.objects.filter(title__contains=performance_search)  # DB에서 title에 검색 결과가 포함되어 있는 값
     # 기간 선택 기능
-    if request.GET.get('date'):
+    elif request.GET.get('date'):
         date_search = request.GET.get('date')     # 검색 결과 받아오기
         performance_lists = PerformanceDB.objects.filter(startDate__lte=date_search, endDate__gte=date_search)  # DB에서 title에 검색 결과가 포함되어 있는 값
         print(request.GET.get('date'))
@@ -89,7 +92,17 @@ def performance(request):
     elif request.GET.get('orderby'):
         orderby_list = request.GET.getlist('orderby')
         if orderby_list[0] == '거리':
-            orderby_lists = PerformanceDB.objects.all().order_by('-title')
+            current_latitude = float(request.GET.get('latitude'))
+            current_longitude = float(request.GET.get('longitude'))
+            distanceDict = OrderedDict()
+            for i in range(len(PerformanceDB.objects.all())):
+                distanceDict[PerformanceDB.objects.all().values()[i]['seq']] = math.sqrt((current_latitude-PerformanceDB.objects.all().values()[i]['gpsY'])**2 + (current_longitude-PerformanceDB.objects.all().values()[i]['gpsX'])**2)
+            distanceDict = dict(sorted(distanceDict.items(), key=lambda x: x[1]))
+            orderby_distance_list = list(distanceDict)
+            orderby_lists = PerformanceDB.objects.filter(seq=orderby_distance_list[0])
+            print(orderby_lists)
+            for i in range(1, len(PerformanceDB.objects.all())):
+                orderby_lists = orderby_lists|PerformanceDB.objects.filter(seq=orderby_distance_list[i])
         elif orderby_list[0] == '제목':
             orderby_lists = PerformanceDB.objects.all().order_by('title')
         elif orderby_list[0] == '시작일':
@@ -180,8 +193,6 @@ def wishlist(request):
 def mypage(request):
     return render(request, 'mypage.html')
 
-def memberedit(request):
-    return render(request, 'memberedit.html')
 def add_wishlist(request):
     pass
 
