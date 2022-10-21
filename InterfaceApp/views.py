@@ -210,7 +210,7 @@ def del_wishlist(request):
 def mypage(request):
     return render(request, 'mypage.html')
 
-def memberedit(request):
-    return render(request, 'memberedit.html')
+def profile(request):
+    return render(request, 'profile.html')
 
 
